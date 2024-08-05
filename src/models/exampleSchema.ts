@@ -1,80 +1,59 @@
 type User = {
-  id: string;
-  firstName: string;
-  lastName: string;
-  phone: string;
+  _id: string;
+  fullName: string;
+  phoneNumber: string;
   email: string;
   password: number;
-  avatarUrl?: string;
-  birthYear: number;
-  activeClassIds: string[];
+  profilePic: string;
+
+  // enrolledClassIds: string[];
+  tutorProfile: TutorProfile;
+  favorites: string[]
   createdAt: string;
 };
-type Tutor = {
-  id: string;
-  firstName: string;
-  lastName: string;
-  password: number;
-  phone: string;
-  email: string;
-  avatarUrl?: string;
-  birthYear: number;
-  createdAt: string;
-  rating: number; //1-5
-};
+
+type TutorProfile = {
+  classes: Course[];
+  resume: {
+  education: string;
+  workExperiences: string;
+  certificationurls:string[]
+}
+}
+
+type Education = {
+  universityName: string;
+  degree: string[] //Bachelor-Master-Doctor..
+  duration: string //2010-2015
+}
+
+type WorkExperience = {
+  jobTitle: string;
+  companyName: string;
+  duration: string
+}
+
+
 
 type Course = {
-  id: string;
-  tutorId: string;
+  _id: string;
+  topic: string[]; //language->> Exam/..for children/..Business //Arts->> Digital arts/ visual arts etc
+  category: string;
+  description: string;
+  videoLesson: string;
+  price: number;
+  level: string; //Beginner-Intermediate-Advanced
+  availableDays: string[]; //Mon-Sun
+  availableTimes: string[]; //Morning-Afternoon-Evening-Night
+  enrolledStudentIds: string[];
+
+  rating: number;
+  reviews: Review[];
+}
+
+type Review = {
+  studentId: string; //find user's details by id
+  review: string;
   createdAt: string;
-  rating: number; //1-5
-  basicInfo: {
-    title: string;
-    categoryIds: string[];
-    topic: string;
-    level: "Beginner" | "Intermediate" | "Advanced";
-    schedule: {
-      totalHours: number;
-      hoursPerDay: number;
-      dates: string[];
-      startHour: number;
-    };
-  };
-  advancedInfo: {
-    thumbnailUrl: string;
-    testVideoUrl: string;
-    description: string;
-    subjects: Subject[];
-    targetAudiences: TargetAudience[];
-  };
-  curriculum: CurriculumSection[];
-  publicationDetails: {
-    welcomeMessage: string;
-    congratulationsMessage: string;
-  };
-};
-
-type Subject = {
-  name: string;
-  subTopics?: string[];
-};
-
-type TargetAudience = {
-  ageGroup: number;
-  additionalGroups?: number[];
-};
-
-type CurriculumSection = {
-  name: string;
-  lectures: Lecture[];
-};
-
-type Lecture = {
-  id: string;
-  title: string;
-  videoUrl?: string;
-  fileUrl?: string;
-  caption?: string;
-  description?: string;
-  notes?: string;
-};
+  rating: number;
+}
