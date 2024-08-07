@@ -17,7 +17,7 @@ const courseSchema = new mongoose.Schema(
     },
     videoLesson: String,
     price: {
-      type: Array,
+      type: String,
       required: [true, "Please provide a price for per 50-min"],
     },
     level: {

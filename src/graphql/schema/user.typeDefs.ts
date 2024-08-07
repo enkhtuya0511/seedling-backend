@@ -13,16 +13,18 @@ export const userTypeDefs = gql`
 
     favorites: [String]
     otpCode: String
-    otpCodeExpires: Number
+    otpCodeExpires: Float
   }
 
   type TutorProfile {
     courseIds: [String]
-    resume: {
-        education: String,
-        workExperiences: String,
-        certificationUrls: [String],
-    }
+    resume: Resume
+  }
+
+  type Resume {
+    education: String,
+    workExperiences: String,
+    certificationUrls: [String],
   }
 
   type Query {
@@ -43,14 +45,17 @@ export const userTypeDefs = gql`
     password: String!
   }
 
+  input ResumeInput {
+    education: String,
+    workExperiences: String,
+    certificationUrls: [String],
+  }
+
   input TutorProfileInput {
     courseIds: [String]
-    resume: {
-        education: String,
-        workExperiences: String,
-        certificationUrls: [String],
-    }
+    resume: ResumeInput
   }
+
 
   input UpdateUserInput {
     fullName: String

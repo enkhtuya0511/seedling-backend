@@ -1,4 +1,13 @@
-type User = {
+export type TutorProfileType = {
+    courseIds: string[];
+    resume: {
+        education: string;
+        workExperiences: string;
+        certificationurls: string[]
+    }
+}
+
+export type UserType = {
     _id: string;
     fullName: string;
     phoneNumber: string;
@@ -7,22 +16,12 @@ type User = {
     profilePic: string;
 
     // enrolledClassIds: string[];
-    tutorProfile: TutorProfile;
+    tutorProfile: TutorProfileType;
+
     favorites: string[]
-    createdAt: string;
-
-    resetPasswordToken: String,
-    resetPasswordExpires: Date,
+    otpCode: String,
+    otpCodeExpires: Date,
 };
-
-type TutorProfile = {
-    classes: Course[];
-    resume: {
-        education: string;
-        workExperiences: string;
-        certificationurls: string[]
-    }
-}
 
 type Education = {
     universityName: string;
@@ -58,3 +57,5 @@ type Review = {
     createdAt: string;
     rating: number;
 }
+
+//native-tags
