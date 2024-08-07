@@ -82,6 +82,7 @@ export type Mutation = {
 
 export type MutationCreateCourseArgs = {
   input: CreateCourseInput;
+  userId: Scalars['String']['input'];
 };
 
 
@@ -102,6 +103,7 @@ export type MutationDeleteCategoryArgs = {
 
 export type MutationDeleteCourseArgs = {
   courseId: Scalars['String']['input'];
+  userId: Scalars['String']['input'];
 };
 
 
@@ -131,6 +133,7 @@ export type MutationUpdateCategoryArgs = {
 
 
 export type MutationUpdateCourseArgs = {
+  courseId: Scalars['String']['input'];
   input: UpdateCourseInput;
 };
 
@@ -223,7 +226,6 @@ export type TutorProfileInput = {
 };
 
 export type UpdateCourseInput = {
-  _id: Scalars['String']['input'];
   availableDays?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   availableTimes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   categoryId?: InputMaybe<Scalars['String']['input']>;

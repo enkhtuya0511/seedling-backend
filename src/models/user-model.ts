@@ -40,7 +40,16 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
-    tutorProfile: TutorProfile,
+    tutorProfile: {
+      courseIds: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Course",
+          default: []
+        },
+      ],
+      resume: Resume,
+    },
 
     favorites: [
       {
