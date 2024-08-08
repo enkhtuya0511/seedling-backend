@@ -64,8 +64,8 @@ export type LoginInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  createCategory: Category;
   createCourse: Course;
-  createNewCategory: Category;
   createReview: Review;
   deleteCategory?: Maybe<Category>;
   deleteCourse?: Maybe<Course>;
@@ -80,14 +80,14 @@ export type Mutation = {
 };
 
 
-export type MutationCreateCourseArgs = {
-  input: CreateCourseInput;
-  userId: Scalars['String']['input'];
+export type MutationCreateCategoryArgs = {
+  categoryName: Scalars['String']['input'];
 };
 
 
-export type MutationCreateNewCategoryArgs = {
-  categoryName: Scalars['String']['input'];
+export type MutationCreateCourseArgs = {
+  input: CreateCourseInput;
+  userId: Scalars['String']['input'];
 };
 
 
@@ -150,10 +150,10 @@ export type MutationUpdateUserArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  categories?: Maybe<Array<Category>>;
+  category: Category;
   course: Course;
   courses?: Maybe<Array<Course>>;
-  getAllCategories?: Maybe<Array<Category>>;
-  getCategory: Category;
   review: Review;
   reviews?: Maybe<Array<Review>>;
   user: User;
@@ -161,13 +161,13 @@ export type Query = {
 };
 
 
-export type QueryCourseArgs = {
-  courseId?: InputMaybe<Scalars['String']['input']>;
+export type QueryCategoryArgs = {
+  categoryId: Scalars['String']['input'];
 };
 
 
-export type QueryGetCategoryArgs = {
-  categoryId: Scalars['String']['input'];
+export type QueryCourseArgs = {
+  courseId?: InputMaybe<Scalars['String']['input']>;
 };
 
 

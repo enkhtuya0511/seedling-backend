@@ -6,7 +6,10 @@ import { userTypeDefs } from "./user.typeDefs";
 import { courseTypeDefs } from "./course.typeDefs";
 
 const mergedTypeDefs = mergeTypeDefs([
-    userTypeDefs, courseTypeDefs
-])
+  userTypeDefs,
+  courseTypeDefs,
+  categoryTypeDefs,
+  reviewTypeDefs,
+]);
 
-export default mergedTypeDefs
+export default mergedTypeDefs;

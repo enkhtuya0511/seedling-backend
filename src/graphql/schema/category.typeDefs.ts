@@ -7,8 +7,8 @@ export const categoryTypeDefs = gql`
   }
 
   type Query {
-    getAllCategories: [Category!]
-    getCategory(categoryId: String!): Category!
+    categories: [Category!]
+    category(categoryId: String!): Category!
   }
 
   input CategoryInput {
@@ -17,7 +17,7 @@ export const categoryTypeDefs = gql`
   }
 
   type Mutation {
-    createNewCategory(categoryName: String!): Category!
+    createCategory(categoryName: String!): Category!
     updateCategory(input: CategoryInput!): Category!
     deleteCategory(categoryId: String!): Category
   }
