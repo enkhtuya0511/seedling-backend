@@ -13,12 +13,13 @@ const courseSchema = new mongoose.Schema(
       required: [
         true,
         "Please provide a description about your private lesson",
-      ],
+      ]
     },
     videoLesson: String,
     price: {
       type: String,
       required: [true, "Please provide a price for per 50-min"],
+
     },
     level: {
       type: Array,
@@ -52,6 +53,6 @@ const courseSchema = new mongoose.Schema(
 );
 
 const Course =
-  mongoose.models?.course || mongoose.model("Course", courseSchema);
+  mongoose.models?.Course || mongoose.model("Course", courseSchema);
 
 export default Course;

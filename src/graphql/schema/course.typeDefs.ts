@@ -33,7 +33,6 @@ export const courseTypeDefs = gql`
   }
 
   input UpdateCourseInput {
-    _id: String!
     topic: [String]
     categoryId: String
     description: String
@@ -48,8 +47,8 @@ export const courseTypeDefs = gql`
   }
 
   type Mutation {
-    createCourse(input: CreateCourseInput!): Course!
-    updateCourse(input: UpdateCourseInput!): Course!
-    deleteCourse(courseId: String!): Course
+    createCourse(input: CreateCourseInput!, userId: String!): Course!
+    updateCourse(input: UpdateCourseInput!, courseId: String!): Course!
+    deleteCourse(courseId: String!, userId: String!): Course
   }
 `;

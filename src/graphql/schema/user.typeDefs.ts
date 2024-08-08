@@ -1,6 +1,17 @@
 import gql from "graphql-tag";
 
 export const userTypeDefs = gql`
+  type Resume {
+    education: String
+    workExperiences: String
+    certificationUrls: [String]
+  }
+
+  type TutorProfile {
+    courseIds: [String]
+    resume: Resume
+  }
+
   type User {
     _id: String!
     fullName: String!
@@ -14,17 +25,6 @@ export const userTypeDefs = gql`
     favorites: [String]
     otpCode: String
     otpCodeExpires: Float
-  }
-
-  type TutorProfile {
-    courseIds: [String]
-    resume: Resume
-  }
-
-  type Resume {
-    education: String,
-    workExperiences: String,
-    certificationUrls: [String],
   }
 
   type Query {
@@ -46,16 +46,15 @@ export const userTypeDefs = gql`
   }
 
   input ResumeInput {
-    education: String,
-    workExperiences: String,
-    certificationUrls: [String],
+    education: String
+    workExperiences: String
+    certificationUrls: [String]
   }
 
   input TutorProfileInput {
     courseIds: [String]
     resume: ResumeInput
   }
-
 
   input UpdateUserInput {
     fullName: String
