@@ -4,8 +4,9 @@ const courseSchema = new mongoose.Schema(
   {
     topic: Array,
     categoryId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Category",
+      // type: mongoose.Schema.Types.ObjectId,
+      // ref: "Category",
+      type: String, 
       required: [true, "Please provide a category"],
     },
     description: {

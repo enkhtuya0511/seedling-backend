@@ -7,11 +7,14 @@ export async function createCourse(
   { input, userId }: { input: CreateCourseInput; userId: String }
 ) {
   try {
-    const user = await User.findById(userId);
-    console.log("input", input)
     const newCourse = await Course.create(input);
 
-    user.tutorProfile.courseIds.push(newCourse._id);
+    const user = await User.findByIdAndUpdate(userId, {
+      "$push": { "tutorProfile.courseIds": newCourse._id } 
+    });
+    // console.log("input", input)
+
+    // user.tutorProfile.courseIds.push(newCourse._id);
     await user.save()
 
     return newCourse;
