@@ -7,9 +7,7 @@ export async function deleteCourse(
 ) {
   try {
     const user = await User.findById(userId)
-    const filteredCourses = user.tutorProfile.courseIds.filter((item: string) => item !== courseId)
-    console.log("filteredCourses", filteredCourses)
-    ///not workinggggg
+    const filteredCourses = user.tutorProfile.courseIds.filter((item: string) => item.toString() !== courseId)
     user.tutorProfile.courseIds = filteredCourses
     await user.save()
 

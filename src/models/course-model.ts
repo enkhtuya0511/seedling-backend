@@ -4,25 +4,22 @@ const courseSchema = new mongoose.Schema(
   {
     topic: Array,
     categoryId: {
-      // type: mongoose.Schema.Types.ObjectId,
-      // ref: "Category",
-      type: String,
-      // required: [true, "Please provide a category"],
-      required: true
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
+      required: [true, "Please provide a category"],
     },
     description: {
       type: String,
-      // required: [
-        // true,
-        // "Please provide a description about your private lesson",
-      // ],
-      required: true
+      required: [
+        true,
+        "Please provide a description about your private lesson",
+      ]
     },
     videoLesson: String,
     price: {
       type: String,
-      // required: [true, "Please provide a price for per 50-min"],
-      required: true
+      required: [true, "Please provide a price for per 50-min"],
+
     },
     level: {
       type: Array,
