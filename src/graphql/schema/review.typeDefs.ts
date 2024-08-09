@@ -20,6 +20,7 @@ export const reviewTypeDefs = gql`
   }
 
   input UpdateReviewInput {
+    _id: String!
     studentId: String!
     comment: String
     rating: Float

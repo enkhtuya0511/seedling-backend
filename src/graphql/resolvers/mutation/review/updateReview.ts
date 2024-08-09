@@ -3,13 +3,22 @@ import Review from "@/models/review-model";
 
 export async function updateReview(
   parent: any,
-  { input, reviewId }: { input: UpdateReviewInput; reviewId: String }
+  { input }: { input: UpdateReviewInput }
 ) {
   try {
-    const updateReview = await Review.findByIdAndUpdate(input, { new: true });
-    return updateReview;
-  } catch (error) {
-    console.error("Error updating Review: ", error);
-    throw new Error("Error updating review");
+    const { _id, ...updateFields } = input;
+
+    const updatedReview = await Review.findByIdAndUpdate(_id, updateFields, {
+      new: true,
+    });
+
+    if (!updatedReview) {
+      throw new Error(`Review with id ${_id} not found`);
+    }
+
+    return updatedReview;
+  } catch (error: any) {
+    console.error("Error updating review: ", error.message);
+    throw new Error("Failed to update review");
   }
 }
