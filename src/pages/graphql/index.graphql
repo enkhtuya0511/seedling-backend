@@ -1,0 +1,187 @@
+query Users {
+  users {
+    _id
+    fullName
+    email
+    phoneNumber
+    password
+    profilePic
+    tutorProfile {
+      courseIds
+      resume {
+        education
+        workExperiences
+        certificationUrls
+      }
+    }
+    favorites
+    otpCode
+    otpCodeExpires
+  }
+}
+
+query User($token: String) {
+  user(token: $token) {
+    _id
+    fullName
+    email
+    phoneNumber
+    password
+    profilePic
+    tutorProfile {
+      courseIds
+      resume {
+        education
+        workExperiences
+        certificationUrls
+      }
+    }
+    favorites
+    otpCode
+    otpCodeExpires
+  }
+}
+
+mutation Login($input: LoginInput!) {
+  login(input: $input) {
+    token
+  }
+}
+
+mutation SignUp($input: SignUpInput!) {
+  signUp(input: $input) {
+    _id
+    fullName
+    email
+    phoneNumber
+    password
+    profilePic
+    tutorProfile {
+      courseIds
+      resume {
+        education
+        workExperiences
+        certificationUrls
+      }
+    }
+    favorites
+    otpCode
+    otpCodeExpires
+  }
+}
+
+mutation DeleteUser($userId: String!) {
+  deleteUser(userId: $userId) {
+    _id
+    fullName
+    email
+    phoneNumber
+    password
+    profilePic
+    favorites
+    otpCode
+    otpCodeExpires
+  }
+}
+
+mutation UpdateUser($userId: String!, $input: UpdateUserInput!) {
+  updateUser(userId: $userId, input: $input) {
+    _id
+    fullName
+    email
+    phoneNumber
+    password
+    profilePic
+    tutorProfile {
+      courseIds
+      resume {
+        education
+        workExperiences
+        certificationUrls
+      }
+    }
+    favorites
+    otpCode
+    otpCodeExpires
+  }
+}
+
+query Courses {
+  courses {
+    _id
+    topic
+    categoryId
+    description
+    videoLesson
+    price
+    level
+    availableDays
+    availableTimes
+    enrolledStudentIds
+    reviewIds
+  }
+}
+
+query Course($courseId: String) {
+  course(courseId: $courseId) {
+    _id
+    topic
+    categoryId
+    description
+    videoLesson
+    price
+    level
+    availableDays
+    availableTimes
+    enrolledStudentIds
+    reviewIds
+  }
+}
+
+mutation CreateCourse($input: CreateCourseInput!, $userId: String!) {
+  createCourse(input: $input, userId: $userId) {
+    _id
+    topic
+    categoryId
+    description
+    videoLesson
+    price
+    level
+    availableDays
+    availableTimes
+    enrolledStudentIds
+    reviewIds
+  }
+}
+
+mutation UpdateCourse($input: UpdateCourseInput!, $courseId: String!) {
+  updateCourse(input: $input, courseId: $courseId) {
+    _id
+    topic
+    categoryId
+    description
+    videoLesson
+    price
+    level
+    availableDays
+    availableTimes
+    enrolledStudentIds
+    reviewIds
+  }
+}
+
+mutation DeleteCourse($courseId: String!, $userId: String!) {
+  deleteCourse(courseId: $courseId, userId: $userId) {
+    _id
+    topic
+    categoryId
+    description
+    videoLesson
+    price
+    level
+    availableDays
+    availableTimes
+    enrolledStudentIds
+    reviewIds
+  }
+}
