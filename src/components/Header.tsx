@@ -3,13 +3,17 @@ import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
 export default function Header() {
+  const handleLogout = () => {
+    console.log("logout");
+    localStorage.removeItem("token");
+    window.location.reload();
+  };
   return (
     <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6 justify-end">
       <DropdownMenu>
@@ -22,7 +26,9 @@ export default function Header() {
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Миний аккаунт</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Гарах</DropdownMenuItem>
+          <div onClick={() => handleLogout()} className="pl-3">
+            Гарах
+          </div>
         </DropdownMenuContent>
       </DropdownMenu>
     </header>

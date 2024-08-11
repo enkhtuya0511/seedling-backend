@@ -1,24 +1,74 @@
-import Image from "next/image";
-import Link from "next/link";
-import { ReactElement } from "react";
-import Layout from "./layout";
-import type { NextPageWithLayout } from "../_app";
+"use client";
 
-const Login: NextPageWithLayout = () => {
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import { LoginInput, useLoginMutation } from "../generated";
+import toast from "react-hot-toast";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+const Login = () => {
+  const router = useRouter();
+  const [loginInput, setLoginInput] = useState({} as LoginInput);
+  const [loginMutation, { loading, error }] = useLoginMutation();
+
+  const handleLogin = async () => {
+    try {
+      const { data } = await loginMutation({
+        variables: { input: loginInput },
+      });
+      if (data) {
+        localStorage.setItem("token", data?.login?.token as string);
+        router.push("/dashboard");
+      }
+    } catch (error: any) {
+      console.log("error in login: ", error);
+      toast.error(error.message);
+    }
+  };
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
-      <div className="p-8 bg-white rounded-lg shadow-md min-w-80">
-        <Link href={"/"} className="flex justify-center mb-4">
-          <Image src={"/vercel.svg"} width={40} height={40} alt="logo" />
-        </Link>
-        <h1 className="text-2xl font-bold text-center mb-4">Log in to Tutor Dashboard</h1>
-      </div>
+    <div className="w-full h-screen flex justify-center items-center">
+      <Card className="w-full max-w-sm">
+        <CardHeader>
+          <CardTitle className="text-2xl">Нэвтрэх</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid gap-4">
+            <div className="grid gap-2">
+              <Label htmlFor="email">Имэйл хаяг</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="m@example.com"
+                required
+                onChange={(e) => setLoginInput((prev) => ({ ...prev, email: e.target.value }))}
+              />
+            </div>
+            <div className="grid gap-2">
+              <div className="flex items-center">
+                <Label htmlFor="password">Нууц үг</Label>
+                <Link href="#" className="ml-auto inline-block text-sm underline">
+                  Нууц үгээ мартсан уу?
+                </Link>
+              </div>
+              <Input
+                id="password"
+                type="password"
+                required
+                onChange={(e) => setLoginInput((prev) => ({ ...prev, password: e.target.value }))}
+              />
+            </div>
+            <Button type="submit" className="w-full" onClick={handleLogin} disabled={loading}>
+              Нэвтрэх
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
-};
-
-Login.getLayout = function getLayout(page: ReactElement) {
-  return <Layout>{page}</Layout>;
 };
 
 export default Login;
