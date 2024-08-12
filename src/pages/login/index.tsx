@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { LoginInput, useLoginMutation } from "../generated";
 import toast from "react-hot-toast";
+import { Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -62,7 +63,14 @@ const Login = () => {
               />
             </div>
             <Button type="submit" className="w-full" onClick={handleLogin} disabled={loading}>
-              Нэвтрэх
+              {loading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Түр хүлээнэ үү
+                </>
+              ) : (
+                "Нэвтрэх"
+              )}
             </Button>
           </div>
         </CardContent>
