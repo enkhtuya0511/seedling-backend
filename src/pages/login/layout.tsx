@@ -2,6 +2,7 @@ import React from "react";
 import Header from "@/components/Header";
 import NavBar from "@/components/NavBar";
 import { ThemeProvider } from "@/components/Theme-provider";
+import { Toaster } from "react-hot-toast";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -10,7 +11,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         <NavBar />
         <div className="flex flex-col">
           <Header />
-          <div className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">{children}</div>
+          <div className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
+            {children} <Toaster />
+          </div>
         </div>
       </div>
     </ThemeProvider>
