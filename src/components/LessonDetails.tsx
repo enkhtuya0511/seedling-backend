@@ -5,6 +5,8 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { CreateCourseInput } from "@/pages/generated";
+import { Input } from "./ui/input";
+import Topic from "./Topic";
 
 type Props = {
   handleData: (arg: string, field: string) => void;
@@ -23,40 +25,21 @@ const LessonDetails = ({ handleData, handlePress, newLesson }: Props) => {
           <div className="grid gap-3">
             <Label>Чиглэл</Label>
             <div className="flex gap-2">
-              <div>
-                <div className="flex justify-between items-center p-2 border rounded gap-1">
-                  <h1>Хар зураг</h1>{" "}
-                  <button className="hover:text-gray-400">
-                    <X />
-                  </button>
-                </div>
-              </div>
-              <Button>
-                <Plus />
-              </Button>
+              <Topic handleData={handleData} />
             </div>
           </div>
           <div className="grid gap-3">
             <Label>Түвшин</Label>
             <div className="flex gap-2">
-              <Button
-                onClick={() => handlePress("Aнхан шат", "level")}
-                variant={newLesson?.level?.includes("Aнхан шат") ? "default" : "outline"}
-              >
-                анхан шат
-              </Button>
-              <Button
-                onClick={() => handlePress("Дунд шат", "level")}
-                variant={newLesson?.level?.includes("Дунд шат") ? "default" : "outline"}
-              >
-                дунд шат
-              </Button>
-              <Button
-                onClick={() => handlePress("Aхисан шат", "level")}
-                variant={newLesson?.level?.includes("Aхисан шат") ? "default" : "outline"}
-              >
-                Aхисан шат
-              </Button>
+              {levels.map((level, id) => (
+                <Button
+                  key={id}
+                  onClick={() => handlePress(level, "level")}
+                  variant={newLesson?.level?.includes(level) ? "default" : "outline"}
+                >
+                  {level}
+                </Button>
+              ))}
             </div>
           </div>
           <div className="grid gap-3">
@@ -75,3 +58,5 @@ const LessonDetails = ({ handleData, handlePress, newLesson }: Props) => {
 };
 
 export default LessonDetails;
+
+const levels = ["Aнхан шат", "Дунд шат", "Aхисан шат"];
