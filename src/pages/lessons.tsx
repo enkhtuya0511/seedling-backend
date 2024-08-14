@@ -1,8 +1,8 @@
 "use client";
 import { ReactElement } from "react";
 import type { NextPageWithLayout } from "./_app";
-import { useCoursesQuery } from "./generated";
-import Layout from "./login/layout";
+import { useCoursesQuery } from "@/generated";
+import Layout from "../components/Layout";
 
 const Page: NextPageWithLayout = () => {
   const { data, loading, error } = useCoursesQuery();

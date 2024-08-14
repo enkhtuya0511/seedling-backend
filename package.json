@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "codegen": "graphql-codegen --config codegen.ts",
     "dev": "npm run codegen && next dev",
     "build": "npm run codegen && next build",
     "start": "next start",
-    "lint": "next lint",
-    "codegen": "graphql-codegen --config codegen.ts"
+    "lint": "next lint"
   },
   "dependencies": {
     "@apollo/client": "^3.11.4",
@@ -29,6 +29,7 @@
     "@radix-ui/react-toggle": "^1.1.0",
     "@radix-ui/react-toggle-group": "^1.1.0",
     "@radix-ui/react-tooltip": "^1.1.2",
+    "@tanstack/react-query": "^5.51.23",
     "bcryptjs": "^2.4.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",

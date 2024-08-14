@@ -1,10 +1,10 @@
 overwrite: true
-schema: "http://localhost:3000/api/graphql"
+schema: "src/graphql/schema"
 
 documents: "./src/pages/graphql/**/*.graphql"
 
 generates:
-  ./src/pages/generated/index.ts:
+  ./src/generated/index.ts:
     config:
       reactApolloVersion: 3
       withHOC: true

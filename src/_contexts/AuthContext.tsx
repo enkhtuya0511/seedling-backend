@@ -1,8 +1,8 @@
 "use client";
 
 import React, { ReactNode, createContext, useContext, useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { User, useUserLazyQuery } from "@/pages/generated";
+import { usePathname, useRouter } from "next/navigation";
+import { User, useUserLazyQuery } from "@/generated";
 
 type Props = {
   children: ReactNode;
@@ -24,6 +24,7 @@ const AuthProvider = (props: Props) => {
   const [userdata, setUserData] = useState<User | null>(null);
   const { children } = props;
   const [getUser] = useUserLazyQuery();
+  const pathname = usePathname();
 
   useEffect(() => {
     const getUserData = async () => {
@@ -37,6 +38,9 @@ const AuthProvider = (props: Props) => {
               setUserData(data.user);
               console.log("first");
             }
+            if (pathname === "/") {
+              router.push("/dashboard");
+            }
           } catch (error) {
             console.error("error getting user:", error);
             router.push("/login");
@@ -47,7 +51,7 @@ const AuthProvider = (props: Props) => {
       }
     };
     getUserData();
-  }, [router, getUser]);
+  }, [router, getUser, pathname]);
 
   return <AuthContext.Provider value={{ userdata, setUserData }}>{children}</AuthContext.Provider>;
 };

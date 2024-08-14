@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import type { NextPageWithLayout } from "./_app";
-import Layout from "./login/layout";
+import Layout from "../components/Layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";

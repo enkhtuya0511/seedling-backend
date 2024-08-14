@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { LoginInput, useLoginMutation } from "../generated";
+import { LoginInput, useLoginMutation } from "@/generated";
 import toast from "react-hot-toast";
 import { Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";

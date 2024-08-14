@@ -19,6 +19,17 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
+export type Category = {
+  __typename?: 'Category';
+  _id: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+};
+
+export type CategoryInput = {
+  categoryId: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+};
+
 export type Course = {
   __typename?: 'Course';
   _id: Scalars['String']['output'];
@@ -45,6 +56,12 @@ export type CreateCourseInput = {
   videoLesson?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type CreateReviewInput = {
+  comment: Scalars['String']['input'];
+  rating: Scalars['Float']['input'];
+  studentId: Scalars['String']['input'];
+};
+
 export type LoginInput = {
   email: Scalars['String']['input'];
   password: Scalars['String']['input'];
@@ -52,13 +69,24 @@ export type LoginInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  createCategory: Category;
   createCourse: Course;
+  createReview: Review;
+  deleteCategory?: Maybe<Category>;
   deleteCourse?: Maybe<Course>;
+  deleteReview?: Maybe<Review>;
   deleteUser?: Maybe<User>;
   login?: Maybe<Token>;
   signUp: User;
+  updateCategory: Category;
   updateCourse: Course;
+  updateReview: Review;
   updateUser: User;
+};
+
+
+export type MutationCreateCategoryArgs = {
+  categoryName: Scalars['String']['input'];
 };
 
 
@@ -68,9 +96,24 @@ export type MutationCreateCourseArgs = {
 };
 
 
+export type MutationCreateReviewArgs = {
+  input: CreateReviewInput;
+};
+
+
+export type MutationDeleteCategoryArgs = {
+  categoryId: Scalars['String']['input'];
+};
+
+
 export type MutationDeleteCourseArgs = {
   courseId: Scalars['String']['input'];
   userId: Scalars['String']['input'];
+};
+
+
+export type MutationDeleteReviewArgs = {
+  reviewId: Scalars['String']['input'];
 };
 
 
@@ -89,9 +132,19 @@ export type MutationSignUpArgs = {
 };
 
 
+export type MutationUpdateCategoryArgs = {
+  input: CategoryInput;
+};
+
+
 export type MutationUpdateCourseArgs = {
   courseId: Scalars['String']['input'];
   input: UpdateCourseInput;
+};
+
+
+export type MutationUpdateReviewArgs = {
+  input: UpdateReviewInput;
 };
 
 
@@ -102,15 +155,29 @@ export type MutationUpdateUserArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  categories?: Maybe<Array<Category>>;
+  category: Category;
   course: Course;
   courses?: Maybe<Array<Course>>;
+  review: Review;
+  reviews?: Maybe<Array<Review>>;
   user: User;
   users?: Maybe<Array<User>>;
 };
 
 
+export type QueryCategoryArgs = {
+  categoryId: Scalars['String']['input'];
+};
+
+
 export type QueryCourseArgs = {
   courseId?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryReviewArgs = {
+  reviewId: Scalars['String']['input'];
 };
 
 
@@ -129,6 +196,14 @@ export type ResumeInput = {
   certificationUrls?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   education?: InputMaybe<Scalars['String']['input']>;
   workExperiences?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type Review = {
+  __typename?: 'Review';
+  _id: Scalars['String']['output'];
+  comment: Scalars['String']['output'];
+  rating: Scalars['Float']['output'];
+  studentId: Scalars['String']['output'];
 };
 
 export type SignUpInput = {
@@ -166,6 +241,13 @@ export type UpdateCourseInput = {
   reviewIds?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   topic?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   videoLesson?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type UpdateReviewInput = {
+  _id: Scalars['String']['input'];
+  comment?: InputMaybe<Scalars['String']['input']>;
+  rating?: InputMaybe<Scalars['Float']['input']>;
+  studentId: Scalars['String']['input'];
 };
 
 export type UpdateUserInput = {

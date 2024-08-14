@@ -239,6 +239,7 @@ export type UpdateCourseInput = {
 };
 
 export type UpdateReviewInput = {
+  _id: Scalars['String']['input'];
   comment?: InputMaybe<Scalars['String']['input']>;
   rating?: InputMaybe<Scalars['Float']['input']>;
   studentId: Scalars['String']['input'];
