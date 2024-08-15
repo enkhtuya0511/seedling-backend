@@ -2,12 +2,11 @@
 
 import * as React from "react";
 import { Check, ChevronsUpDown } from "lucide-react";
-
 import { cn } from "@/lib/utils";
+import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Input } from "./ui/input";
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
 
 type Props = {
   handleData: (arg: string, field: string) => void;
@@ -21,7 +20,6 @@ const Topic = ({ handleData }: Props) => {
 
   const AddTopic = (topic: string) => {
     console.log("new topic: ", topic);
-    // setCategories([...categories, category]);
     topics.push(topic);
     setShow(false);
     setTopic("");
@@ -76,26 +74,3 @@ const Topic = ({ handleData }: Props) => {
 export default Topic;
 
 const topics = ["Гитар", "Хийл", "Хар зураг", "График дизайн"];
-
-{
-  /* <Select value={input?.subject as string} onValueChange={(val) => setInput((prev) => ({ ...prev, subject: val }))}>
-                <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder="Category" />
-                </SelectTrigger>
-                <SelectContent>
-                  {categories.map((item, idx) => (
-                    <SelectItem key={idx} value={item}>
-                      {item}
-                    </SelectItem>
-                  ))}
-                  {show ? (
-                    <div className="flex gap-[5px]">
-                      <Input placeholder="Add Category..." onChange={(e) => setCategory(e.target.value)} />
-                      <Button onClick={() => AddCategory(category)}>Add</Button>
-                    </div>
-                  ) : (
-                    <Button onClick={() => setShow(true)}>Add Category</Button>
-                  )}
-                </SelectContent>
-              </Select> */
-}

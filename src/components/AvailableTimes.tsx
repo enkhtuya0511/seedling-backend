@@ -1,8 +1,7 @@
-import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CreateCourseInput } from "@/graphql/generated";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { CreateCourseInput } from "@/generated";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 type Props = {
   handlePress: (arg: string, field: keyof CreateCourseInput) => void;

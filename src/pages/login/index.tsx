@@ -1,20 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useState } from "react";
-import { LoginInput, useLoginMutation } from "@/generated";
-import toast from "react-hot-toast";
+import { useRouter } from "next/router";
+import { LoginInput, useLoginMutation } from "@/graphql/generated";
 import { Loader2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const router = useRouter();
   const [loginInput, setLoginInput] = useState({} as LoginInput);
-  const [loginMutation, { loading, error }] = useLoginMutation();
+  const [loginMutation, { loading }] = useLoginMutation();
 
   const handleLogin = async () => {
     try {

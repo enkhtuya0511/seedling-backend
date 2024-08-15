@@ -2,8 +2,9 @@ import React, { ChangeEvent, useRef, useState } from "react";
 import { storage } from "@/firebase/firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { Upload } from "lucide-react";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import toast from "react-hot-toast";
 
 type Props = {
   handleData: (arg: string, field: string) => void;
@@ -50,6 +51,7 @@ const VideoLesson = ({ handleData }: Props) => {
         },
         (error) => {
           console.error("Upload failed", error);
+          toast.error("Видео байршуулахад алдаа гарлаа. Дахин оролдоно уу.");
           setLoading(false);
         },
         () => {
@@ -79,7 +81,7 @@ const VideoLesson = ({ handleData }: Props) => {
             </div>
           )}
           {uploadedVideo && (
-            <video width="640" height="360" controls>
+            <video className="w-full h-auto max-w-full" controls>
               <source src={uploadedVideo} type="video/mp4" />
             </video>
           )}

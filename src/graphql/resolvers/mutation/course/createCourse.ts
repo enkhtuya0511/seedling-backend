@@ -1,4 +1,4 @@
-import { CreateCourseInput } from "@/graphql/generated/client";
+import { CreateCourseInput } from "@/graphql/generated";
 import Course from "@/models/course-model";
 import User from "@/models/user-model";
 

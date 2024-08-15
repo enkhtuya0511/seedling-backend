@@ -7,7 +7,7 @@ import { Toaster } from "react-hot-toast";
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-      <div className="min-h-screen w-full grid md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
+      <div className="min-h-screen w-full grid md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr] relative">
         <NavBar />
         <div className="flex flex-col">
           <Header />

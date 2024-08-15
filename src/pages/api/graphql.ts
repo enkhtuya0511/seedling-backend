@@ -1,6 +1,6 @@
-import { startServerAndCreateNextHandler } from "@as-integrations/next";
-import { ApolloServer } from "@apollo/server";
 import { NextRequest } from "next/server";
+import { ApolloServer } from "@apollo/server";
+import { startServerAndCreateNextHandler } from "@as-integrations/next";
 import { connectDB } from "@/utils/db-connect";
 import { resolvers } from "@/graphql/resolvers";
 import mergedTypeDefs from "@/graphql/schema";

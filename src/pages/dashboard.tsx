@@ -1,12 +1,12 @@
 import { ReactElement } from "react";
 import type { NextPageWithLayout } from "./_app";
-import Layout from "../components/Layout";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import Layout from "@/components/Layout";
+import { useAuth } from "@/_contexts/AuthContext";
+import { Users, BookOpenCheck, BookCopy } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Users, BookOpenCheck, BookCopy } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useAuth } from "@/_contexts/AuthContext";
 
 const Dashboard: NextPageWithLayout = () => {
   const { userdata } = useAuth();

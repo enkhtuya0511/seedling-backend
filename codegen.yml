@@ -4,7 +4,7 @@ schema: "src/graphql/schema"
 documents: "./src/pages/graphql/**/*.graphql"
 
 generates:
-  ./src/generated/index.ts:
+  ./src/graphql/generated/index.ts:
     config:
       reactApolloVersion: 3
       withHOC: true
