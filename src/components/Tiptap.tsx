@@ -3,30 +3,31 @@
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import ToolBar from "./ToolBar";
-import Underline from "@tiptap/extension-underline";
 
 const Tiptap = ({ onChange, content }: any) => {
-  const handleChange = (newContent: string) => {
-    onChange(newContent);
-  };
   const editor = useEditor({
-    extensions: [StarterKit, Underline],
+    extensions: [StarterKit],
     immediatelyRender: false,
     editorProps: {
       attributes: {
         class:
-          "flex flex-col px-4 py-3 justify-start border-b border-r border-l border-gray-700 text-gray-400 items-start w-full gap-3 font-medium text-[16px] pt-4 rounded-bl-md rounded-br-md outline-none",
+          "flex flex-col px-4 py-3 justify-start border-b border-r border-l border-gray-700 text-gray-400 items-start w-full gap-3 font-medium text-[16px] pt-4 rounded-bl-md rounded-br-md outline-none prose",
       },
     },
     onUpdate: ({ editor }) => {
-      handleChange(editor.getHTML());
+      onChange(editor.getHTML());
     },
   });
 
   return (
     <div className="w-full px-4">
       <ToolBar editor={editor} content={content} />
-      <EditorContent editor={editor} style={{ whiteSpace: "pre-line" }} />
+      <EditorContent editor={editor} />
+      <div
+        className="ProseMirror whitespace-pre-line border border-slate-700 px-6 py-4 rounded-lg"
+        style={{ whiteSpace: "pre-line" }}
+        dangerouslySetInnerHTML={{ __html: content }}
+      />
     </div>
   );
 };
