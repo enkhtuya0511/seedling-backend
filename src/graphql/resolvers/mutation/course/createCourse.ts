@@ -9,9 +9,6 @@ export async function createCourse(parent: any, { input, userId }: { input: Crea
     const user = await User.findByIdAndUpdate(userId, {
       $push: { "tutorProfile.courseIds": newCourse._id },
     });
-    // console.log("input", input)
-
-    // user.tutorProfile.courseIds.push(newCourse._id);
     await user.save();
 
     return newCourse;

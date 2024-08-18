@@ -46,7 +46,7 @@ const Topic = ({ handleData }: Props) => {
                     setValue(currentValue === value ? "" : currentValue);
                     setOpen(false);
                     console.log("first", currentValue);
-                    handleData(currentValue, "topic");
+                    handleData(currentValue, "subject");
                   }}
                 >
                   <Check className={cn("mr-2 h-4 w-4", value === topic ? "opacity-100" : "opacity-0")} />

@@ -1,9 +1,9 @@
-import { CreateCourseInput } from "@/graphql/generated";
-import Topic from "./Topic";
+import { CreateCourseInput, useCategoriesQuery } from "@/graphql/generated";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 type Props = {
   handleData: (arg: string, field: string) => void;
@@ -12,6 +12,7 @@ type Props = {
 };
 
 const LessonDetails = ({ handleData, handlePress, newLesson }: Props) => {
+  const { data } = useCategoriesQuery();
   return (
     <Card x-chunk="dashboard-07-chunk-0">
       <CardHeader>
@@ -20,10 +21,19 @@ const LessonDetails = ({ handleData, handlePress, newLesson }: Props) => {
       <CardContent>
         <div className="grid gap-6">
           <div className="grid gap-3">
-            <Label>Чиглэл</Label>
-            <div className="flex gap-2">
-              <Topic handleData={handleData} />
-            </div>
+            <Label>Ангилал</Label>
+            <Select onValueChange={(val) => handleData(val, "categoryId")}>
+              <SelectTrigger id="category" aria-label="Select status">
+                <SelectValue placeholder="Ангилалаа сонгох" />
+              </SelectTrigger>
+              <SelectContent>
+                {data?.categories?.map((category) => (
+                  <SelectItem value={category._id} key={category._id}>
+                    {category.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
           <div className="grid gap-3">
             <Label>Түвшин</Label>
