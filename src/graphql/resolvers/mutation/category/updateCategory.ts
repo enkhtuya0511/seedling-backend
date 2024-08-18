@@ -1,10 +1,7 @@
-import { CategoryInput } from "@/graphql/generated/client";
+import { CategoryInput } from "@/graphql/generated";
 import Category from "@/models/category-model";
 
-export async function updateCategory(
-  parent: any,
-  { input }: { input: CategoryInput }
-) {
+export async function updateCategory(parent: any, { input }: { input: CategoryInput }) {
   try {
     const updateCategory = await Category.findByIdAndUpdate(
       input.categoryId,

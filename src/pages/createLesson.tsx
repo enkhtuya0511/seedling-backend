@@ -3,14 +3,14 @@
 import { ReactElement, useState } from "react";
 import type { NextPageWithLayout } from "./_app";
 import { useAuth } from "@/_contexts/AuthContext";
-import { CoursesDocument, CreateCourseInput, useCreateCourseMutation } from "@/generated";
-import toast from "react-hot-toast";
-import { Button } from "@/components/ui/button";
-import Layout from "../components/Layout";
+import { CoursesDocument, CreateCourseInput, useCreateCourseMutation } from "@/graphql/generated";
+import Layout from "@/components/Layout";
 import LessonDetails from "@/components/LessonDetails";
 import AvailableTimes from "@/components/AvailableTimes";
 import VideoLesson from "@/components/VideoLesson";
 import CategoryAndPrice from "@/components/CategoryAndPrice";
+import { Button } from "@/components/ui/button";
+import toast from "react-hot-toast";
 
 const Page: NextPageWithLayout = () => {
   const { userdata } = useAuth();

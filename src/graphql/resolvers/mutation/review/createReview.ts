@@ -1,10 +1,7 @@
-import { CreateReviewInput } from "@/graphql/generated/client";
+import { CreateReviewInput } from "@/graphql/generated";
 import Review from "@/models/review-model";
 
-export async function createReview(
-  parent: any,
-  { input }: { input: CreateReviewInput }
-) {
+export async function createReview(parent: any, { input }: { input: CreateReviewInput }) {
   try {
     const NewReview = await Review.create(input);
     return NewReview;

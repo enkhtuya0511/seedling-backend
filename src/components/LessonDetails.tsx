@@ -1,10 +1,9 @@
-import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CreateCourseInput } from "@/graphql/generated";
+import Topic from "./Topic";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { CreateCourseInput } from "@/generated";
-import Topic from "./Topic";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 type Props = {
   handleData: (arg: string, field: string) => void;
@@ -44,7 +43,7 @@ const LessonDetails = ({ handleData, handlePress, newLesson }: Props) => {
             <Label>Хичээлийн Тодорхойлолт</Label>
             <Textarea
               id="description"
-              defaultValue="График дизайны үндэс, хэрэгслүүд, арга техникүүд болон бүтээлч процессуудыг суралцах..."
+              placeholder="График дизайны үндэс, хэрэгслүүд, арга техникүүд болон бүтээлч процессуудыг суралцах..."
               className="min-h-32"
               onChange={(e) => handleData(e.target.value, "description")}
             />

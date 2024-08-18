@@ -2,7 +2,7 @@
 
 import React, { ReactNode, createContext, useContext, useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { User, useUserLazyQuery } from "@/generated";
+import { User, useUserLazyQuery } from "@/graphql/generated";
 
 type Props = {
   children: ReactNode;
@@ -20,23 +20,22 @@ export function useAuth() {
 }
 
 const AuthProvider = (props: Props) => {
-  const router = useRouter();
   const [userdata, setUserData] = useState<User | null>(null);
-  const { children } = props;
   const [getUser] = useUserLazyQuery();
+  const router = useRouter();
   const pathname = usePathname();
+  const { children } = props;
 
   useEffect(() => {
     const getUserData = async () => {
       if (window) {
         const token = localStorage.getItem("token");
-        console.log("token", token);
         if (token) {
           try {
             const { data } = await getUser({ variables: { token } });
             if (data) {
               setUserData(data.user);
-              console.log("first");
+              console.log("userdata: ", data.user);
             }
             if (pathname === "/") {
               router.push("/dashboard");

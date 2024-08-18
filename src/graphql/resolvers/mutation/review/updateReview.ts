@@ -1,10 +1,7 @@
-import { UpdateReviewInput } from "@/graphql/generated/client";
+import { UpdateReviewInput } from "@/graphql/generated";
 import Review from "@/models/review-model";
 
-export async function updateReview(
-  parent: any,
-  { input }: { input: UpdateReviewInput }
-) {
+export async function updateReview(parent: any, { input }: { input: UpdateReviewInput }) {
   try {
     const { _id, ...updateFields } = input;
 
