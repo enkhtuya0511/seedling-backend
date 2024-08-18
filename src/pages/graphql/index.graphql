@@ -109,7 +109,7 @@ mutation UpdateUser($userId: String!, $input: UpdateUserInput!) {
 query Courses {
   courses {
     _id
-    topic
+    subject
     categoryId
     description
     videoLesson
@@ -125,7 +125,7 @@ query Courses {
 query Course($courseId: String) {
   course(courseId: $courseId) {
     _id
-    topic
+    subject
     categoryId
     description
     videoLesson
@@ -141,7 +141,7 @@ query Course($courseId: String) {
 mutation CreateCourse($input: CreateCourseInput!, $userId: String!) {
   createCourse(input: $input, userId: $userId) {
     _id
-    topic
+    subject
     categoryId
     description
     videoLesson
@@ -157,7 +157,7 @@ mutation CreateCourse($input: CreateCourseInput!, $userId: String!) {
 mutation UpdateCourse($input: UpdateCourseInput!, $courseId: String!) {
   updateCourse(input: $input, courseId: $courseId) {
     _id
-    topic
+    subject
     categoryId
     description
     videoLesson
@@ -173,7 +173,7 @@ mutation UpdateCourse($input: UpdateCourseInput!, $courseId: String!) {
 mutation DeleteCourse($courseId: String!, $userId: String!) {
   deleteCourse(courseId: $courseId, userId: $userId) {
     _id
-    topic
+    subject
     categoryId
     description
     videoLesson
@@ -183,5 +183,33 @@ mutation DeleteCourse($courseId: String!, $userId: String!) {
     availableTimes
     enrolledStudentIds
     reviewIds
+  }
+}
+
+query Categories {
+  categories {
+    _id
+    name
+  }
+}
+
+query Category($categoryId: String!) {
+  category(categoryId: $categoryId) {
+    _id
+    name
+  }
+}
+
+mutation DeleteCategory($categoryId: String!) {
+  deleteCategory(categoryId: $categoryId) {
+    _id
+    name
+  }
+}
+
+mutation CreateCategory($categoryName: String!) {
+  createCategory(categoryName: $categoryName) {
+    _id
+    name
   }
 }

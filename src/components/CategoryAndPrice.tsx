@@ -1,7 +1,7 @@
+import Topic from "./Topic";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 type Props = {
   handleData: (arg: string, field: string) => void;
@@ -16,17 +16,10 @@ const CategoryAndPrice = ({ handleData }: Props) => {
       <CardContent>
         <div className="grid gap-6">
           <div className="grid gap-3">
-            <Label>Ангилал</Label>
-            <Select onValueChange={(val) => handleData(val, "categoryId")}>
-              <SelectTrigger id="category" aria-label="Select status">
-                <SelectValue placeholder="Ангилалаа сонгох" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="draft">Draft</SelectItem>
-                <SelectItem value="published">Active</SelectItem>
-                <SelectItem value="archived">Archived</SelectItem>
-              </SelectContent>
-            </Select>
+            <Label>Чиглэл</Label>
+            <div className="flex gap-2">
+              <Topic handleData={handleData} />
+            </div>
           </div>
           <div className="grid gap-3">
             <Label>Үнэ /50-минут бүр/</Label>
