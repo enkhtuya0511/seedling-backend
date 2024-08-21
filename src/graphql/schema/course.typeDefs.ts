@@ -3,6 +3,7 @@ import gql from "graphql-tag";
 export const courseTypeDefs = gql`
   type Course {
     _id: String!
+    tutorId: User!
     subject: String!
     categoryId: String!
     description: String!
@@ -12,7 +13,7 @@ export const courseTypeDefs = gql`
     availableDays: [String!]
     availableTimes: [String!]
     enrolledStudentIds: [String]
-
+    requestedStudentIds: [String]
     reviewIds: [String]
   }
 
@@ -58,6 +59,7 @@ export const courseTypeDefs = gql`
     availableDays: [String]
     availableTimes: [String]
     enrolledStudentIds: [String]
+    requestedStudentIds: [String]
 
     reviewIds: [String]
   }

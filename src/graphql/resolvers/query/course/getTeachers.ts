@@ -4,7 +4,7 @@ import { GetTeachersInput } from "@/graphql/generated";
 export async function getTeachers(parent: any, { input }: { input: GetTeachersInput }) {
   try {
     const { categoryId, subject, availableDays, availableTimes, priceRange, level } = input;
-    let teachers = await Course.find({});
+    let teachers = await Course.find({}).populate("tutorId");
 
     if (categoryId) {
       teachers = teachers.filter((teacher) => teacher.categoryId.toString() === categoryId.toString());
