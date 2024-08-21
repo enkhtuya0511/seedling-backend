@@ -3,20 +3,19 @@ import { GetTeachersInput } from "@/graphql/generated";
 
 export async function getTeachers(parent: any, { input }: { input: GetTeachersInput }) {
   try {
-    const { categoryId, subject, availableDays, availableTimes, priceRange } = input;
+    const { categoryId, subject, availableDays, availableTimes, priceRange, level } = input;
     let teachers = await Course.find({});
 
-    //fix type later
     if (categoryId) {
-      teachers = teachers.filter((teacher) => teacher.categoryId.toString() === categoryId);
-      //   console.log("first", categoryId, teachers[0]?.categoryId);
-      //   console.log("first", categoryId === teachers[0]?.categoryId.toString());
-      console.log("teachers: /categoryId ", teachers);
+      teachers = teachers.filter((teacher) => teacher.categoryId.toString() === categoryId.toString());
     }
 
     if (subject) {
       teachers = teachers.filter((teacher) => teacher.subject.includes(subject));
-      console.log("teachers: /subject ", teachers);
+    }
+
+    if (level && level.length > 0) {
+      teachers = teachers.filter((teacher) => level.some((item) => teacher.level.includes(item)));
     }
 
     if (priceRange) {
@@ -25,17 +24,14 @@ export async function getTeachers(parent: any, { input }: { input: GetTeachersIn
         const price = parseFloat(teacher.price);
         return price >= parseFloat(min) && price <= parseFloat(max);
       });
-      console.log("teachers: /priceRange", teachers);
     }
 
     if (availableTimes && availableTimes.length > 0) {
       teachers = teachers.filter((teacher) => availableTimes.some((time) => teacher.availableTimes.includes(time)));
-      console.log("teachers: /availableTimes", teachers);
     }
 
     if (availableDays && availableDays.length > 0) {
       teachers = teachers.filter((teacher) => availableDays.some((day) => teacher.availableDays.includes(day)));
-      console.log("teachers: /availableDays", teachers);
     }
 
     return teachers;
