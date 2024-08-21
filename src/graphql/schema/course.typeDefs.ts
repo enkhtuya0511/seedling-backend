@@ -27,6 +27,7 @@ export const courseTypeDefs = gql`
     priceRange: PriceRangeInput!
     availableDays: [String!]
     availableTimes: [String!]
+    level: [String!]
   }
 
   type Query {

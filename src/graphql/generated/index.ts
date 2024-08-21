@@ -295,6 +295,7 @@ export type GetTeachersInput = {
   availableDays?: InputMaybe<Array<Scalars['String']['input']>>;
   availableTimes?: InputMaybe<Array<Scalars['String']['input']>>;
   categoryId: Scalars['String']['input'];
+  level?: InputMaybe<Array<Scalars['String']['input']>>;
   priceRange: PriceRangeInput;
   subject?: InputMaybe<Scalars['String']['input']>;
 };
