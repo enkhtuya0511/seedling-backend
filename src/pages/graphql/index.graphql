@@ -109,6 +109,23 @@ mutation UpdateUser($userId: String!, $input: UpdateUserInput!) {
 query Courses {
   courses {
     _id
+    tutorId {
+      _id
+      fullName
+      email
+      phoneNumber
+      password
+      profilePic
+      tutorProfile {
+        courseIds
+        resume {
+          education
+          workExperiences
+          certificationUrls
+        }
+      }
+      favorites
+    }
     subject
     categoryId
     description
@@ -118,6 +135,7 @@ query Courses {
     availableDays
     availableTimes
     enrolledStudentIds
+    requestedStudentIds
     reviewIds
   }
 }
@@ -125,6 +143,23 @@ query Courses {
 query Course($courseId: String) {
   course(courseId: $courseId) {
     _id
+    tutorId {
+      _id
+      fullName
+      email
+      phoneNumber
+      password
+      profilePic
+      tutorProfile {
+        courseIds
+        resume {
+          education
+          workExperiences
+          certificationUrls
+        }
+      }
+      favorites
+    }
     subject
     categoryId
     description
@@ -134,6 +169,7 @@ query Course($courseId: String) {
     availableDays
     availableTimes
     enrolledStudentIds
+    requestedStudentIds
     reviewIds
   }
 }
@@ -141,6 +177,22 @@ query Course($courseId: String) {
 mutation CreateCourse($input: CreateCourseInput!, $userId: String!) {
   createCourse(input: $input, userId: $userId) {
     _id
+    tutorId {
+      _id
+      fullName
+      email
+      phoneNumber
+      password
+      profilePic
+      tutorProfile {
+        courseIds
+        resume {
+          education
+          workExperiences
+          certificationUrls
+        }
+      }
+    }
     subject
     categoryId
     description
@@ -150,6 +202,7 @@ mutation CreateCourse($input: CreateCourseInput!, $userId: String!) {
     availableDays
     availableTimes
     enrolledStudentIds
+    requestedStudentIds
     reviewIds
   }
 }
@@ -157,6 +210,21 @@ mutation CreateCourse($input: CreateCourseInput!, $userId: String!) {
 mutation UpdateCourse($input: UpdateCourseInput!, $courseId: String!) {
   updateCourse(input: $input, courseId: $courseId) {
     _id
+    tutorId {
+      _id
+      fullName
+      email
+      phoneNumber
+      profilePic
+      tutorProfile {
+        courseIds
+        resume {
+          education
+          workExperiences
+          certificationUrls
+        }
+      }
+    }
     subject
     categoryId
     description
@@ -166,6 +234,7 @@ mutation UpdateCourse($input: UpdateCourseInput!, $courseId: String!) {
     availableDays
     availableTimes
     enrolledStudentIds
+    requestedStudentIds
     reviewIds
   }
 }
@@ -173,6 +242,12 @@ mutation UpdateCourse($input: UpdateCourseInput!, $courseId: String!) {
 mutation DeleteCourse($courseId: String!, $userId: String!) {
   deleteCourse(courseId: $courseId, userId: $userId) {
     _id
+    tutorId {
+      _id
+      fullName
+      email
+      phoneNumber
+    }
     subject
     categoryId
     description
@@ -182,6 +257,7 @@ mutation DeleteCourse($courseId: String!, $userId: String!) {
     availableDays
     availableTimes
     enrolledStudentIds
+    requestedStudentIds
     reviewIds
   }
 }

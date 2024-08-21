@@ -40,8 +40,10 @@ export type Course = {
   enrolledStudentIds?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   level?: Maybe<Array<Scalars['String']['output']>>;
   price: Scalars['String']['output'];
+  requestedStudentIds?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   reviewIds?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   subject: Scalars['String']['output'];
+  tutorId: User;
   videoLesson?: Maybe<Scalars['String']['output']>;
 };
 
@@ -255,6 +257,7 @@ export type UpdateCourseInput = {
   enrolledStudentIds?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   level?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   price?: InputMaybe<Scalars['String']['input']>;
+  requestedStudentIds?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   reviewIds?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   subject?: InputMaybe<Scalars['String']['input']>;
   videoLesson?: InputMaybe<Scalars['String']['input']>;
@@ -344,14 +347,14 @@ export type UpdateUserMutation = { __typename?: 'Mutation', updateUser: { __type
 export type CoursesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CoursesQuery = { __typename?: 'Query', courses?: Array<{ __typename?: 'Course', _id: string, subject: string, categoryId: string, description: string, videoLesson?: string | null, price: string, level?: Array<string> | null, availableDays?: Array<string> | null, availableTimes?: Array<string> | null, enrolledStudentIds?: Array<string | null> | null, reviewIds?: Array<string | null> | null }> | null };
+export type CoursesQuery = { __typename?: 'Query', courses?: Array<{ __typename?: 'Course', _id: string, subject: string, categoryId: string, description: string, videoLesson?: string | null, price: string, level?: Array<string> | null, availableDays?: Array<string> | null, availableTimes?: Array<string> | null, enrolledStudentIds?: Array<string | null> | null, requestedStudentIds?: Array<string | null> | null, reviewIds?: Array<string | null> | null, tutorId: { __typename?: 'User', _id: string, fullName: string, email: string, phoneNumber: string, password: string, profilePic: string, favorites?: Array<string | null> | null, tutorProfile?: { __typename?: 'TutorProfile', courseIds?: Array<string | null> | null, resume?: { __typename?: 'Resume', education?: string | null, workExperiences?: string | null, certificationUrls?: Array<string | null> | null } | null } | null } }> | null };
 
 export type CourseQueryVariables = Exact<{
   courseId?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type CourseQuery = { __typename?: 'Query', course: { __typename?: 'Course', _id: string, subject: string, categoryId: string, description: string, videoLesson?: string | null, price: string, level?: Array<string> | null, availableDays?: Array<string> | null, availableTimes?: Array<string> | null, enrolledStudentIds?: Array<string | null> | null, reviewIds?: Array<string | null> | null } };
+export type CourseQuery = { __typename?: 'Query', course: { __typename?: 'Course', _id: string, subject: string, categoryId: string, description: string, videoLesson?: string | null, price: string, level?: Array<string> | null, availableDays?: Array<string> | null, availableTimes?: Array<string> | null, enrolledStudentIds?: Array<string | null> | null, requestedStudentIds?: Array<string | null> | null, reviewIds?: Array<string | null> | null, tutorId: { __typename?: 'User', _id: string, fullName: string, email: string, phoneNumber: string, password: string, profilePic: string, favorites?: Array<string | null> | null, tutorProfile?: { __typename?: 'TutorProfile', courseIds?: Array<string | null> | null, resume?: { __typename?: 'Resume', education?: string | null, workExperiences?: string | null, certificationUrls?: Array<string | null> | null } | null } | null } } };
 
 export type CreateCourseMutationVariables = Exact<{
   input: CreateCourseInput;
@@ -359,7 +362,7 @@ export type CreateCourseMutationVariables = Exact<{
 }>;
 
 
-export type CreateCourseMutation = { __typename?: 'Mutation', createCourse: { __typename?: 'Course', _id: string, subject: string, categoryId: string, description: string, videoLesson?: string | null, price: string, level?: Array<string> | null, availableDays?: Array<string> | null, availableTimes?: Array<string> | null, enrolledStudentIds?: Array<string | null> | null, reviewIds?: Array<string | null> | null } };
+export type CreateCourseMutation = { __typename?: 'Mutation', createCourse: { __typename?: 'Course', _id: string, subject: string, categoryId: string, description: string, videoLesson?: string | null, price: string, level?: Array<string> | null, availableDays?: Array<string> | null, availableTimes?: Array<string> | null, enrolledStudentIds?: Array<string | null> | null, requestedStudentIds?: Array<string | null> | null, reviewIds?: Array<string | null> | null, tutorId: { __typename?: 'User', _id: string, fullName: string, email: string, phoneNumber: string, password: string, profilePic: string, tutorProfile?: { __typename?: 'TutorProfile', courseIds?: Array<string | null> | null, resume?: { __typename?: 'Resume', education?: string | null, workExperiences?: string | null, certificationUrls?: Array<string | null> | null } | null } | null } } };
 
 export type UpdateCourseMutationVariables = Exact<{
   input: UpdateCourseInput;
@@ -367,7 +370,7 @@ export type UpdateCourseMutationVariables = Exact<{
 }>;
 
 
-export type UpdateCourseMutation = { __typename?: 'Mutation', updateCourse: { __typename?: 'Course', _id: string, subject: string, categoryId: string, description: string, videoLesson?: string | null, price: string, level?: Array<string> | null, availableDays?: Array<string> | null, availableTimes?: Array<string> | null, enrolledStudentIds?: Array<string | null> | null, reviewIds?: Array<string | null> | null } };
+export type UpdateCourseMutation = { __typename?: 'Mutation', updateCourse: { __typename?: 'Course', _id: string, subject: string, categoryId: string, description: string, videoLesson?: string | null, price: string, level?: Array<string> | null, availableDays?: Array<string> | null, availableTimes?: Array<string> | null, enrolledStudentIds?: Array<string | null> | null, requestedStudentIds?: Array<string | null> | null, reviewIds?: Array<string | null> | null, tutorId: { __typename?: 'User', _id: string, fullName: string, email: string, phoneNumber: string, profilePic: string, tutorProfile?: { __typename?: 'TutorProfile', courseIds?: Array<string | null> | null, resume?: { __typename?: 'Resume', education?: string | null, workExperiences?: string | null, certificationUrls?: Array<string | null> | null } | null } | null } } };
 
 export type DeleteCourseMutationVariables = Exact<{
   courseId: Scalars['String']['input'];
@@ -375,7 +378,7 @@ export type DeleteCourseMutationVariables = Exact<{
 }>;
 
 
-export type DeleteCourseMutation = { __typename?: 'Mutation', deleteCourse?: { __typename?: 'Course', _id: string, subject: string, categoryId: string, description: string, videoLesson?: string | null, price: string, level?: Array<string> | null, availableDays?: Array<string> | null, availableTimes?: Array<string> | null, enrolledStudentIds?: Array<string | null> | null, reviewIds?: Array<string | null> | null } | null };
+export type DeleteCourseMutation = { __typename?: 'Mutation', deleteCourse?: { __typename?: 'Course', _id: string, subject: string, categoryId: string, description: string, videoLesson?: string | null, price: string, level?: Array<string> | null, availableDays?: Array<string> | null, availableTimes?: Array<string> | null, enrolledStudentIds?: Array<string | null> | null, requestedStudentIds?: Array<string | null> | null, reviewIds?: Array<string | null> | null, tutorId: { __typename?: 'User', _id: string, fullName: string, email: string, phoneNumber: string } } | null };
 
 export type CategoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -770,6 +773,23 @@ export const CoursesDocument = gql`
     query Courses {
   courses {
     _id
+    tutorId {
+      _id
+      fullName
+      email
+      phoneNumber
+      password
+      profilePic
+      tutorProfile {
+        courseIds
+        resume {
+          education
+          workExperiences
+          certificationUrls
+        }
+      }
+      favorites
+    }
     subject
     categoryId
     description
@@ -779,6 +799,7 @@ export const CoursesDocument = gql`
     availableDays
     availableTimes
     enrolledStudentIds
+    requestedStudentIds
     reviewIds
   }
 }
@@ -832,6 +853,23 @@ export const CourseDocument = gql`
     query Course($courseId: String) {
   course(courseId: $courseId) {
     _id
+    tutorId {
+      _id
+      fullName
+      email
+      phoneNumber
+      password
+      profilePic
+      tutorProfile {
+        courseIds
+        resume {
+          education
+          workExperiences
+          certificationUrls
+        }
+      }
+      favorites
+    }
     subject
     categoryId
     description
@@ -841,6 +879,7 @@ export const CourseDocument = gql`
     availableDays
     availableTimes
     enrolledStudentIds
+    requestedStudentIds
     reviewIds
   }
 }
@@ -895,6 +934,22 @@ export const CreateCourseDocument = gql`
     mutation CreateCourse($input: CreateCourseInput!, $userId: String!) {
   createCourse(input: $input, userId: $userId) {
     _id
+    tutorId {
+      _id
+      fullName
+      email
+      phoneNumber
+      password
+      profilePic
+      tutorProfile {
+        courseIds
+        resume {
+          education
+          workExperiences
+          certificationUrls
+        }
+      }
+    }
     subject
     categoryId
     description
@@ -904,6 +959,7 @@ export const CreateCourseDocument = gql`
     availableDays
     availableTimes
     enrolledStudentIds
+    requestedStudentIds
     reviewIds
   }
 }
@@ -952,6 +1008,21 @@ export const UpdateCourseDocument = gql`
     mutation UpdateCourse($input: UpdateCourseInput!, $courseId: String!) {
   updateCourse(input: $input, courseId: $courseId) {
     _id
+    tutorId {
+      _id
+      fullName
+      email
+      phoneNumber
+      profilePic
+      tutorProfile {
+        courseIds
+        resume {
+          education
+          workExperiences
+          certificationUrls
+        }
+      }
+    }
     subject
     categoryId
     description
@@ -961,6 +1032,7 @@ export const UpdateCourseDocument = gql`
     availableDays
     availableTimes
     enrolledStudentIds
+    requestedStudentIds
     reviewIds
   }
 }
@@ -1009,6 +1081,12 @@ export const DeleteCourseDocument = gql`
     mutation DeleteCourse($courseId: String!, $userId: String!) {
   deleteCourse(courseId: $courseId, userId: $userId) {
     _id
+    tutorId {
+      _id
+      fullName
+      email
+      phoneNumber
+    }
     subject
     categoryId
     description
@@ -1018,6 +1096,7 @@ export const DeleteCourseDocument = gql`
     availableDays
     availableTimes
     enrolledStudentIds
+    requestedStudentIds
     reviewIds
   }
 }

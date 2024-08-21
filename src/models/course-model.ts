@@ -8,6 +8,11 @@ const courseSchema = new mongoose.Schema(
       ref: "Category",
       required: [true, "Please provide a category"],
     },
+    tutorId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
     description: {
       type: String,
       required: [true, "Please provide a description about your private lesson"],
@@ -30,6 +35,13 @@ const courseSchema = new mongoose.Schema(
       required: [true, "Please provide your available times"],
     },
     enrolledStudentIds: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        default: [],
+      },
+    ],
+    requestedStudentIds: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
