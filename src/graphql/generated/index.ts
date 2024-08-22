@@ -272,7 +272,7 @@ export type UpdateReviewInput = {
 
 export type UpdateUserInput = {
   email?: InputMaybe<Scalars['String']['input']>;
-  favorites?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  favorites?: InputMaybe<Scalars['String']['input']>;
   fullName?: InputMaybe<Scalars['String']['input']>;
   password?: InputMaybe<Scalars['String']['input']>;
   phoneNumber?: InputMaybe<Scalars['String']['input']>;

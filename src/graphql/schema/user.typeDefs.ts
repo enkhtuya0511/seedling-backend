@@ -64,7 +64,7 @@ export const userTypeDefs = gql`
     profilePic: String
 
     tutorProfile: TutorProfileInput
-    favorites: [String]
+    favorites: String
   }
 
   type Token {
