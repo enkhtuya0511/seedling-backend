@@ -2,7 +2,7 @@
 
 import React from "react";
 import { type Editor } from "@tiptap/react";
-import { Bold, Italic, List, ListOrdered, Undo, Redo } from "lucide-react";
+import { Bold, List, ListOrdered, Undo, Redo } from "lucide-react";
 
 type Props = {
   editor: Editor | null;
@@ -28,16 +28,6 @@ const Toolbar = ({ editor, content }: Props) => {
         >
           <Bold className="w-5 h-5" />
         </button>
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            editor.chain().focus().toggleItalic().run();
-          }}
-          className={editor.isActive("italic") ? "bg-sky-700 text-white p-2 rounded-lg" : "text-sky-400"}
-        >
-          <Italic className="w-5 h-5" />
-        </button>
-
         <button
           onClick={(e) => {
             e.preventDefault();

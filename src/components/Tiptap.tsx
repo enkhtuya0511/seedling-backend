@@ -17,6 +17,7 @@ const Tiptap = ({ onChange, content }: any) => {
     onUpdate: ({ editor }) => {
       onChange(editor.getHTML());
     },
+    content: '<p>2016 — 2020 МУИС <strong>Хятад хэл шинжлэл</strong></p>',
   });
 
   return (
