@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -9,7 +10,24 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="p-4 h-screen flex items-center justify-center">Hello from backend 🌱</main>
+      <div className="w-full h-screen flex justify-center items-center bg-[#f1f5f9]">
+        <div className="flex items-center justify-center py-12 ">
+          <h1 className="text-4xl font-bold text-balance">
+            Мэдлэгээ бусадтай
+            <br /> хуваалцаарай 🌱
+          </h1>
+        </div>
+        <div className="hidden bg-muted lg:block">
+          <Image
+            src="/sally.png"
+            alt="Image"
+            width="600"
+            height="600"
+            priority
+            className="object-cover dark:brightness-[0.2] dark:grayscale"
+          />
+        </div>
+      </div>
     </>
   );
 }
