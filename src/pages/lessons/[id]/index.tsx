@@ -1,10 +1,11 @@
 "use client";
 
 import { useCourseQuery } from "@/graphql/generated";
-import { useParams } from "next/navigation";
+import { useRouter } from "next/router";
 
 const Page = () => {
-  const { id } = useParams();
+  const router = useRouter();
+  const { id } = router.query;
   const { data, loading, error } = useCourseQuery({
     variables: {
       courseId: id as string,
