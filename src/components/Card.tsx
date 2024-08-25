@@ -9,11 +9,32 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Course } from "@/graphql/generated";
+import { Course, useDeleteCourseMutation } from "@/graphql/generated";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/_contexts/AuthContext";
 
 export function LessonCard({ data }: { data: Course | null }) {
   const { push } = useRouter();
+  const { userdata } = useAuth();
+  const [deleteCourseMutation] = useDeleteCourseMutation();
+
+  const handleDelete = async (idx: string) => {
+    const isConfirmed = window.confirm("Та энэ хичээлийг устгахдаа итгэлтэй байна уу?");
+    if (!isConfirmed) {
+      return;
+    }
+    try {
+      await deleteCourseMutation({
+        variables: {
+          courseId: idx,
+          userId: userdata?._id as string,
+        },
+      });
+      window.location.reload();
+    } catch (error) {
+      console.log("error deleting course: ", error);
+    }
+  };
   return (
     <Card className="w-[310px] shadow-md rounded-lg border overflow-hidden">
       <CardHeader>
@@ -48,7 +69,7 @@ export function LessonCard({ data }: { data: Course | null }) {
                 <UserRoundPen className="mr-2 h-4 w-4" />
                 <span>шинэчлэх</span>
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => console.log("delete lesson id: ", data?._id)}>
+              <DropdownMenuItem onClick={() => handleDelete(data?._id as string)}>
                 <Trash2 className="mr-2 h-4 w-4" />
                 <span>устгах</span>
               </DropdownMenuItem>
