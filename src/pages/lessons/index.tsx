@@ -15,19 +15,17 @@ const Page: NextPageWithLayout = () => {
     },
     skip: !userdata?._id,
   });
+
+  if (loading) return <p>Ачаалж байна...</p>;
   if (!data?.coursesByUser) return <p>Хичээл олдсонгүй.</p>;
   return (
     <div className="flex flex-col gap-2">
       <h1 className="text-xl font-semibold">Миний хичээлүүд</h1>
-      {loading ? (
-        <>loading...</>
-      ) : (
-        <div className="flex gap-3 flex-wrap">
-          {data?.coursesByUser?.map((course, id) => (
-            <LessonCard key={id} data={course as Course} />
-          ))}
-        </div>
-      )}
+      <div className="flex gap-3 flex-wrap">
+        {data?.coursesByUser?.map((course, id) => (
+          <LessonCard key={id} data={course as Course} />
+        ))}
+      </div>
     </div>
   );
 };
