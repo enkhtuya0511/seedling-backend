@@ -310,3 +310,18 @@ query CoursesByUser($userId: String!) {
     reviewIds
   }
 }
+
+query Reviews($courseId: String!) {
+  reviews(courseId: $courseId) {
+    _id
+    comment
+    rating
+    courseId
+    studentId {
+      email
+      _id
+      fullName
+      profilePic
+    }
+  }
+}

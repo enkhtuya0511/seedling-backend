@@ -60,6 +60,7 @@ export type CreateCourseInput = {
 
 export type CreateReviewInput = {
   comment: Scalars['String']['input'];
+  courseId: Scalars['String']['input'];
   rating: Scalars['Float']['input'];
   studentId: Scalars['String']['input'];
 };
@@ -169,7 +170,7 @@ export type Query = {
   coursesByUser?: Maybe<Array<Maybe<Course>>>;
   getTeachers?: Maybe<Array<Maybe<Course>>>;
   review: Review;
-  reviews?: Maybe<Array<Review>>;
+  reviews?: Maybe<Array<Review0>>;
   subjectsByCategory?: Maybe<Array<Scalars['String']['output']>>;
   user: User;
   users?: Maybe<Array<User>>;
@@ -201,6 +202,11 @@ export type QueryReviewArgs = {
 };
 
 
+export type QueryReviewsArgs = {
+  courseId: Scalars['String']['input'];
+};
+
+
 export type QuerySubjectsByCategoryArgs = {
   categoryId: Scalars['String']['input'];
 };
@@ -227,8 +233,18 @@ export type Review = {
   __typename?: 'Review';
   _id: Scalars['String']['output'];
   comment: Scalars['String']['output'];
+  courseId: Scalars['String']['output'];
   rating: Scalars['Float']['output'];
   studentId: Scalars['String']['output'];
+};
+
+export type Review0 = {
+  __typename?: 'Review0';
+  _id: Scalars['String']['output'];
+  comment: Scalars['String']['output'];
+  courseId: Scalars['String']['output'];
+  rating: Scalars['Float']['output'];
+  studentId: User;
 };
 
 export type SignUpInput = {
@@ -272,6 +288,7 @@ export type UpdateCourseInput = {
 export type UpdateReviewInput = {
   _id: Scalars['String']['input'];
   comment?: InputMaybe<Scalars['String']['input']>;
+  courseId: Scalars['String']['input'];
   rating?: InputMaybe<Scalars['Float']['input']>;
   studentId: Scalars['String']['input'];
 };
@@ -425,6 +442,13 @@ export type CoursesByUserQueryVariables = Exact<{
 
 
 export type CoursesByUserQuery = { __typename?: 'Query', coursesByUser?: Array<{ __typename?: 'Course', _id: string, subject: string, categoryId: string, description: string, videoLesson?: string | null, price: string, level?: Array<string> | null, availableDays?: Array<string> | null, availableTimes?: Array<string> | null, enrolledStudentIds?: Array<string | null> | null, requestedStudentIds?: Array<string | null> | null, reviewIds?: Array<string | null> | null } | null> | null };
+
+export type ReviewsQueryVariables = Exact<{
+  courseId: Scalars['String']['input'];
+}>;
+
+
+export type ReviewsQuery = { __typename?: 'Query', reviews?: Array<{ __typename?: 'Review0', _id: string, comment: string, rating: number, courseId: string, studentId: { __typename?: 'User', email: string, _id: string, fullName: string, profilePic: string } }> | null };
 
 
 export const UsersDocument = gql`
@@ -1477,3 +1501,65 @@ export type CoursesByUserQueryHookResult = ReturnType<typeof useCoursesByUserQue
 export type CoursesByUserLazyQueryHookResult = ReturnType<typeof useCoursesByUserLazyQuery>;
 export type CoursesByUserSuspenseQueryHookResult = ReturnType<typeof useCoursesByUserSuspenseQuery>;
 export type CoursesByUserQueryResult = Apollo.QueryResult<CoursesByUserQuery, CoursesByUserQueryVariables>;
+export const ReviewsDocument = gql`
+    query Reviews($courseId: String!) {
+  reviews(courseId: $courseId) {
+    _id
+    comment
+    rating
+    courseId
+    studentId {
+      email
+      _id
+      fullName
+      profilePic
+    }
+  }
+}
+    `;
+export type ReviewsProps<TChildProps = {}, TDataName extends string = 'data'> = {
+      [key in TDataName]: ApolloReactHoc.DataValue<ReviewsQuery, ReviewsQueryVariables>
+    } & TChildProps;
+export function withReviews<TProps, TChildProps = {}, TDataName extends string = 'data'>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  ReviewsQuery,
+  ReviewsQueryVariables,
+  ReviewsProps<TChildProps, TDataName>>) {
+    return ApolloReactHoc.withQuery<TProps, ReviewsQuery, ReviewsQueryVariables, ReviewsProps<TChildProps, TDataName>>(ReviewsDocument, {
+      alias: 'reviews',
+      ...operationOptions
+    });
+};
+
+/**
+ * __useReviewsQuery__
+ *
+ * To run a query within a React component, call `useReviewsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useReviewsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useReviewsQuery({
+ *   variables: {
+ *      courseId: // value for 'courseId'
+ *   },
+ * });
+ */
+export function useReviewsQuery(baseOptions: Apollo.QueryHookOptions<ReviewsQuery, ReviewsQueryVariables> & ({ variables: ReviewsQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ReviewsQuery, ReviewsQueryVariables>(ReviewsDocument, options);
+      }
+export function useReviewsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ReviewsQuery, ReviewsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ReviewsQuery, ReviewsQueryVariables>(ReviewsDocument, options);
+        }
+export function useReviewsSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<ReviewsQuery, ReviewsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<ReviewsQuery, ReviewsQueryVariables>(ReviewsDocument, options);
+        }
+export type ReviewsQueryHookResult = ReturnType<typeof useReviewsQuery>;
+export type ReviewsLazyQueryHookResult = ReturnType<typeof useReviewsLazyQuery>;
+export type ReviewsSuspenseQueryHookResult = ReturnType<typeof useReviewsSuspenseQuery>;
+export type ReviewsQueryResult = Apollo.QueryResult<ReviewsQuery, ReviewsQueryVariables>;
