@@ -7,11 +7,11 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
-import { CreateCourseInput, useSubjectsByCategoryQuery } from "@/graphql/generated";
+import { CreateCourseInput, UpdateCourseInput, useSubjectsByCategoryQuery } from "@/graphql/generated";
 
 type Props = {
-  handleData: (arg: string, field: string) => void;
-  newLesson: CreateCourseInput;
+  handleData: (arg: string, field: keyof UpdateCourseInput) => void;
+  newLesson: UpdateCourseInput;
 };
 
 const Topic = ({ handleData, newLesson }: Props) => {
@@ -23,7 +23,7 @@ const Topic = ({ handleData, newLesson }: Props) => {
 
   const { data, refetch } = useSubjectsByCategoryQuery({
     variables: {
-      categoryId: newLesson.categoryId,
+      categoryId: newLesson.categoryId as string,
     },
     skip: !newLesson.categoryId,
   });
@@ -48,6 +48,12 @@ const Topic = ({ handleData, newLesson }: Props) => {
       handleData(newTopic, "subject");
     }
   };
+
+  React.useEffect(() => {
+    if (newLesson.subject) {
+      setValue(newLesson.subject);
+    }
+  }, [newLesson.subject, handleData]);
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
@@ -57,13 +63,15 @@ const Topic = ({ handleData, newLesson }: Props) => {
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
-        <Command>
+        <Command defaultValue={newLesson.subject as string}>
+          {/* <Command> */}
           <CommandInput placeholder="Чиглэлээ сонгох..." />
           <CommandList>
             <CommandEmpty>Чиглэл олдсонгүй...</CommandEmpty>
             <CommandGroup>
               {topics.map((subject) => (
                 <CommandItem
+                  defaultValue={newLesson.subject as string}
                   key={subject}
                   value={subject}
                   onSelect={(currentValue) => {
