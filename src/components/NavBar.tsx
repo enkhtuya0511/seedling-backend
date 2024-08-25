@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ModeToggle } from "./Theme-toggle";
-import { Users, PencilLine, BarChart3, Sprout, Settings, BookCopy, BookUser } from "lucide-react";
+import { Users, PencilLine, BarChart3, Sprout, BookCopy } from "lucide-react";
 
 export default function NavBar() {
   const pathname = usePathname();
@@ -42,7 +42,7 @@ const navItems = [
   { label: "Dashboard", icon: <BarChart3 className="h-4 w-4" />, name: "dashboard" },
   { label: "Хичээл нэмэх", icon: <PencilLine className="h-4 w-4" />, name: "createLesson" },
   { label: "Миний хичээлүүд", icon: <BookCopy className="h-4 w-4" />, name: "lessons" },
-  { label: "Сурагчид", icon: <Users className="h-4 w-4" />, pathName: "students" },
-  { label: "Хүсэлтүүд", icon: <BookUser className="h-4 w-4" />, pathName: "requests" },
-  { label: "Тохируулга", icon: <Settings className="h-4 w-4" />, pathName: "settings" },
+  { label: "Сурагчид", icon: <Users className="h-4 w-4" />, name: "students" },
+  // { label: "Хүсэлтүүд", icon: <BookUser className="h-4 w-4" />, pathName: "requests" },
+  // { label: "Тохируулга", icon: <Settings className="h-4 w-4" />, pathName: "settings" },
 ];

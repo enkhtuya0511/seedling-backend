@@ -34,7 +34,7 @@ const Reviews = ({ courseId, setCourseId }: Props) => {
   if (loading) return <p>Ачаалж байна...</p>;
   return (
     <div className="flex flex-col gap-2">
-      {data ? (
+      {data?.reviews ? (
         <>
           <Select onValueChange={(val) => setCourseId(val)} defaultValue={courseId as string}>
             <SelectTrigger className="w-[250px]">
