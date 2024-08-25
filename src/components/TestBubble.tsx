@@ -1,18 +1,25 @@
+import React, { useEffect } from "react";
 import { BubbleMenu, EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import React, { useEffect } from "react";
+import { ResumeInput } from "@/graphql/generated";
+import { useAuth } from "@/_contexts/AuthContext";
+import Toolbar from "./ToolBar";
 
-const TestBubble = () => {
+type Props = {
+  title: string;
+  exampleContext: string;
+  handleData: (value: string, field: string) => void;
+  field: keyof ResumeInput;
+};
+
+const TestBubble = ({ title, exampleContext, handleData, field }: Props) => {
+  const { userdata } = useAuth();
   const editor = useEditor({
     extensions: [StarterKit],
     immediatelyRender: false,
-    content: `
-          <p>
-            Hey, try to select some text here. There will popup a menu for selecting some inline styles. Remember: you have full control about content and styling of this menu.
-          </p>
-        `,
+    onUpdate: ({ editor }) => handleData(editor.getHTML(), field),
+    content: userdata?.tutorProfile?.resume?.[field] as string,
   });
-
   const [isEditable, setIsEditable] = React.useState(true);
 
   useEffect(() => {
@@ -21,46 +28,33 @@ const TestBubble = () => {
     }
   }, [isEditable, editor]);
   return (
-    <>
-      <div className="control-group">
-        <label>
-          <input
-            type="checkbox"
-            checked={isEditable}
-            onChange={() => setIsEditable(!isEditable)}
-          />
-          Editable
-        </label>
+    <div className="flex flex-col gap-4 p-4 border rounded-lg shadow-md mx-auto w-full">
+      <div className="control-group flex justify-between items-center">
+        <div className="flex flex-col gap-1">
+          <h3 className="font-bold text-xl">{title}</h3>
+          <label className="flex items-center gap-2 text-sm text-gray-500">
+            <input
+              type="checkbox"
+              checked={isEditable}
+              onChange={() => setIsEditable(!isEditable)}
+              className="form-checkbox h-4 w-4 text-purple-600 transition duration-150 ease-in-out"
+            />
+            Editable
+          </label>
+        </div>
       </div>
-
-      {editor && (
-        <BubbleMenu editor={editor} tippyOptions={{ duration: 100 }}>
-          <div className="bg-[white] border-gray-400 rounded-[11px] shadow-lg flex p-[3px] border-[1px] gap-1">
-            <button
-              onClick={() => editor.chain().focus().toggleBold().run()}
-              className={`${editor.isActive("bold") ? "bg-purple-600" : ""} bg-[white] rounded-[11px] p-[3px] hover:bg-gray-500 text-[#000000]`}
-            >
-              Bold
-            </button>
-            <button
-              onClick={() => editor.chain().focus().toggleItalic().run()}
-              className={`${editor.isActive("italic") ? "bg-purple-600" : ""} bg-[white] rounded-[11px] p-[3px] hover:bg-gray-500 text-[#000000]`}
-            >
-              Italic
-            </button>
-            <button
-              onClick={() => editor.chain().focus().toggleStrike().run()}
-              className={`${editor.isActive("strike") ? "bg-purple-600" : ""} bg-[white] rounded-[11px] p-[3px] hover:bg-gray-500 text-[#000000]`}
-            >
-              Strike
-            </button>
-          </div>
-        </BubbleMenu>
-      )}
-      <EditorContent editor={editor} />
-    </>
+      <p className="font-bold text-base">Жишээ: {exampleContext}</p>
+      <div className="tippy-wrapper relative">
+        {editor && (
+          <BubbleMenu editor={editor} tippyOptions={{ duration: 100, interactive: true }}>
+            <Toolbar editor={editor} />
+          </BubbleMenu>
+        )}
+        <EditorContent editor={editor} className="border-2 border-pink-400 rounded-lg" />
+      </div>
+    </div>
   );
 };
 
 export default TestBubble;
-//"bg-[white] border-gray-400 rounded-[11px] shadow-lg flex p-[3px] border-[1px] hover:bg-gray-500"
+//dangerouslySetInnerHTML={{ __html: content }}

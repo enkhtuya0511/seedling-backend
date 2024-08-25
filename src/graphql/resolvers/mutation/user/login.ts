@@ -21,7 +21,7 @@ export async function login(parent: any, { input }: { input: any }) {
         email: existingUser.email,
       },
       process.env.PRIVATEKEY as string,
-      { expiresIn: "5d" }
+      { expiresIn: "11d" }
     );
 
     const token = { token: data };

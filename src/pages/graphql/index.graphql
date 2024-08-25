@@ -289,3 +289,7 @@ mutation CreateCategory($categoryName: String!) {
     name
   }
 }
+
+query SubjectsByCategory($categoryId: String!) {
+  subjectsByCategory(categoryId: $categoryId)
+}

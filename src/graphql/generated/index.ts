@@ -406,6 +406,13 @@ export type CreateCategoryMutationVariables = Exact<{
 
 export type CreateCategoryMutation = { __typename?: 'Mutation', createCategory: { __typename?: 'Category', _id: string, name: string } };
 
+export type SubjectsByCategoryQueryVariables = Exact<{
+  categoryId: Scalars['String']['input'];
+}>;
+
+
+export type SubjectsByCategoryQuery = { __typename?: 'Query', subjectsByCategory?: Array<string> | null };
+
 
 export const UsersDocument = gql`
     query Users {
@@ -1342,3 +1349,54 @@ export function useCreateCategoryMutation(baseOptions?: Apollo.MutationHookOptio
 export type CreateCategoryMutationHookResult = ReturnType<typeof useCreateCategoryMutation>;
 export type CreateCategoryMutationResult = Apollo.MutationResult<CreateCategoryMutation>;
 export type CreateCategoryMutationOptions = Apollo.BaseMutationOptions<CreateCategoryMutation, CreateCategoryMutationVariables>;
+export const SubjectsByCategoryDocument = gql`
+    query SubjectsByCategory($categoryId: String!) {
+  subjectsByCategory(categoryId: $categoryId)
+}
+    `;
+export type SubjectsByCategoryProps<TChildProps = {}, TDataName extends string = 'data'> = {
+      [key in TDataName]: ApolloReactHoc.DataValue<SubjectsByCategoryQuery, SubjectsByCategoryQueryVariables>
+    } & TChildProps;
+export function withSubjectsByCategory<TProps, TChildProps = {}, TDataName extends string = 'data'>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  SubjectsByCategoryQuery,
+  SubjectsByCategoryQueryVariables,
+  SubjectsByCategoryProps<TChildProps, TDataName>>) {
+    return ApolloReactHoc.withQuery<TProps, SubjectsByCategoryQuery, SubjectsByCategoryQueryVariables, SubjectsByCategoryProps<TChildProps, TDataName>>(SubjectsByCategoryDocument, {
+      alias: 'subjectsByCategory',
+      ...operationOptions
+    });
+};
+
+/**
+ * __useSubjectsByCategoryQuery__
+ *
+ * To run a query within a React component, call `useSubjectsByCategoryQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSubjectsByCategoryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSubjectsByCategoryQuery({
+ *   variables: {
+ *      categoryId: // value for 'categoryId'
+ *   },
+ * });
+ */
+export function useSubjectsByCategoryQuery(baseOptions: Apollo.QueryHookOptions<SubjectsByCategoryQuery, SubjectsByCategoryQueryVariables> & ({ variables: SubjectsByCategoryQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SubjectsByCategoryQuery, SubjectsByCategoryQueryVariables>(SubjectsByCategoryDocument, options);
+      }
+export function useSubjectsByCategoryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SubjectsByCategoryQuery, SubjectsByCategoryQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SubjectsByCategoryQuery, SubjectsByCategoryQueryVariables>(SubjectsByCategoryDocument, options);
+        }
+export function useSubjectsByCategorySuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<SubjectsByCategoryQuery, SubjectsByCategoryQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<SubjectsByCategoryQuery, SubjectsByCategoryQueryVariables>(SubjectsByCategoryDocument, options);
+        }
+export type SubjectsByCategoryQueryHookResult = ReturnType<typeof useSubjectsByCategoryQuery>;
+export type SubjectsByCategoryLazyQueryHookResult = ReturnType<typeof useSubjectsByCategoryLazyQuery>;
+export type SubjectsByCategorySuspenseQueryHookResult = ReturnType<typeof useSubjectsByCategorySuspenseQuery>;
+export type SubjectsByCategoryQueryResult = Apollo.QueryResult<SubjectsByCategoryQuery, SubjectsByCategoryQueryVariables>;

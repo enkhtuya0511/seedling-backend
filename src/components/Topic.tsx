@@ -7,22 +7,46 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
+import { CreateCourseInput, useSubjectsByCategoryQuery } from "@/graphql/generated";
 
 type Props = {
   handleData: (arg: string, field: string) => void;
+  newLesson: CreateCourseInput;
 };
 
-const Topic = ({ handleData }: Props) => {
+const Topic = ({ handleData, newLesson }: Props) => {
   const [open, setOpen] = React.useState<boolean>(false);
   const [value, setValue] = React.useState<string>("");
   const [topic, setTopic] = React.useState<string>("");
   const [show, setShow] = React.useState<boolean>(false);
+  const [topics, setTopics] = React.useState<string[]>([]);
 
-  const AddTopic = (topic: string) => {
-    console.log("new topic: ", topic);
-    topics.push(topic);
-    setShow(false);
-    setTopic("");
+  const { data, refetch } = useSubjectsByCategoryQuery({
+    variables: {
+      categoryId: newLesson.categoryId,
+    },
+    skip: !newLesson.categoryId,
+  });
+
+  React.useEffect(() => {
+    if (newLesson.categoryId) {
+      refetch();
+    }
+  }, [newLesson.categoryId, refetch]);
+
+  React.useEffect(() => {
+    if (data?.subjectsByCategory) {
+      setTopics(data.subjectsByCategory);
+    }
+  }, [data]);
+
+  const AddTopic = (newTopic: string) => {
+    if (newTopic.trim()) {
+      setTopics((prevTopics) => [...prevTopics, newTopic]);
+      setShow(false);
+      setTopic("");
+      handleData(newTopic, "subject");
+    }
   };
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -38,10 +62,10 @@ const Topic = ({ handleData }: Props) => {
           <CommandList>
             <CommandEmpty>Чиглэл олдсонгүй...</CommandEmpty>
             <CommandGroup>
-              {topics.map((topic) => (
+              {topics.map((subject) => (
                 <CommandItem
-                  key={topic}
-                  value={topic}
+                  key={subject}
+                  value={subject}
                   onSelect={(currentValue) => {
                     setValue(currentValue === value ? "" : currentValue);
                     setOpen(false);
@@ -49,8 +73,8 @@ const Topic = ({ handleData }: Props) => {
                     handleData(currentValue, "subject");
                   }}
                 >
-                  <Check className={cn("mr-2 h-4 w-4", value === topic ? "opacity-100" : "opacity-0")} />
-                  {topic}
+                  <Check className={cn("mr-2 h-4 w-4", value === subject ? "opacity-100" : "opacity-0")} />
+                  {subject}
                 </CommandItem>
               ))}
               <CommandItem>
@@ -72,5 +96,3 @@ const Topic = ({ handleData }: Props) => {
 };
 
 export default Topic;
-
-const topics = ["Гитар", "Хийл", "Хар зураг", "График дизайн"];

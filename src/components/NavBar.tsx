@@ -13,7 +13,7 @@ export default function NavBar() {
         <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6 justify-between">
           <div className="flex items-center gap-2 font-semibold">
             <Sprout className="h-6 w-6" />
-            <span className="">Нэмэлт хичээл</span>
+            <span className="">Seedling</span>
           </div>
           <ModeToggle />
         </div>
