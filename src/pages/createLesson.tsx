@@ -21,7 +21,6 @@ const Page: NextPageWithLayout = () => {
     refetchQueries: [{ query: CoursesDocument }],
   });
 
-  console.log("newLesson", newLesson);
   const handleData = (value: string, field: string) => {
     setNewLesson((prev) => ({ ...prev, [field]: value }));
   };
