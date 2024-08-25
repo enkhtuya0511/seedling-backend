@@ -44,11 +44,11 @@ export function LessonCard({ data }: { data: Course }) {
                 <BookOpenCheck className="mr-2 h-4 w-4" />
                 <span>мэдээлэл үзэх</span>
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={() => push(`/update/${data._id}`)}>
                 <UserRoundPen className="mr-2 h-4 w-4" />
                 <span>шинэчлэх</span>
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={() => console.log("delete lesson id: ", data._id)}>
                 <Trash2 className="mr-2 h-4 w-4" />
                 <span>устгах</span>
               </DropdownMenuItem>
