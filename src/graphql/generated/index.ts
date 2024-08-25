@@ -166,6 +166,7 @@ export type Query = {
   category: Category;
   course: Course;
   courses?: Maybe<Array<Course>>;
+  coursesByUser?: Maybe<Array<Maybe<Course>>>;
   getTeachers?: Maybe<Array<Maybe<Course>>>;
   review: Review;
   reviews?: Maybe<Array<Review>>;
@@ -182,6 +183,11 @@ export type QueryCategoryArgs = {
 
 export type QueryCourseArgs = {
   courseId?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryCoursesByUserArgs = {
+  userId: Scalars['String']['input'];
 };
 
 
@@ -412,6 +418,13 @@ export type SubjectsByCategoryQueryVariables = Exact<{
 
 
 export type SubjectsByCategoryQuery = { __typename?: 'Query', subjectsByCategory?: Array<string> | null };
+
+export type CoursesByUserQueryVariables = Exact<{
+  userId: Scalars['String']['input'];
+}>;
+
+
+export type CoursesByUserQuery = { __typename?: 'Query', coursesByUser?: Array<{ __typename?: 'Course', _id: string, subject: string, categoryId: string, description: string, videoLesson?: string | null, price: string, level?: Array<string> | null, availableDays?: Array<string> | null, availableTimes?: Array<string> | null, enrolledStudentIds?: Array<string | null> | null, requestedStudentIds?: Array<string | null> | null, reviewIds?: Array<string | null> | null } | null> | null };
 
 
 export const UsersDocument = gql`
@@ -1400,3 +1413,67 @@ export type SubjectsByCategoryQueryHookResult = ReturnType<typeof useSubjectsByC
 export type SubjectsByCategoryLazyQueryHookResult = ReturnType<typeof useSubjectsByCategoryLazyQuery>;
 export type SubjectsByCategorySuspenseQueryHookResult = ReturnType<typeof useSubjectsByCategorySuspenseQuery>;
 export type SubjectsByCategoryQueryResult = Apollo.QueryResult<SubjectsByCategoryQuery, SubjectsByCategoryQueryVariables>;
+export const CoursesByUserDocument = gql`
+    query CoursesByUser($userId: String!) {
+  coursesByUser(userId: $userId) {
+    _id
+    subject
+    categoryId
+    description
+    videoLesson
+    price
+    level
+    availableDays
+    availableTimes
+    enrolledStudentIds
+    requestedStudentIds
+    reviewIds
+  }
+}
+    `;
+export type CoursesByUserProps<TChildProps = {}, TDataName extends string = 'data'> = {
+      [key in TDataName]: ApolloReactHoc.DataValue<CoursesByUserQuery, CoursesByUserQueryVariables>
+    } & TChildProps;
+export function withCoursesByUser<TProps, TChildProps = {}, TDataName extends string = 'data'>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  CoursesByUserQuery,
+  CoursesByUserQueryVariables,
+  CoursesByUserProps<TChildProps, TDataName>>) {
+    return ApolloReactHoc.withQuery<TProps, CoursesByUserQuery, CoursesByUserQueryVariables, CoursesByUserProps<TChildProps, TDataName>>(CoursesByUserDocument, {
+      alias: 'coursesByUser',
+      ...operationOptions
+    });
+};
+
+/**
+ * __useCoursesByUserQuery__
+ *
+ * To run a query within a React component, call `useCoursesByUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCoursesByUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCoursesByUserQuery({
+ *   variables: {
+ *      userId: // value for 'userId'
+ *   },
+ * });
+ */
+export function useCoursesByUserQuery(baseOptions: Apollo.QueryHookOptions<CoursesByUserQuery, CoursesByUserQueryVariables> & ({ variables: CoursesByUserQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CoursesByUserQuery, CoursesByUserQueryVariables>(CoursesByUserDocument, options);
+      }
+export function useCoursesByUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CoursesByUserQuery, CoursesByUserQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CoursesByUserQuery, CoursesByUserQueryVariables>(CoursesByUserDocument, options);
+        }
+export function useCoursesByUserSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<CoursesByUserQuery, CoursesByUserQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<CoursesByUserQuery, CoursesByUserQueryVariables>(CoursesByUserDocument, options);
+        }
+export type CoursesByUserQueryHookResult = ReturnType<typeof useCoursesByUserQuery>;
+export type CoursesByUserLazyQueryHookResult = ReturnType<typeof useCoursesByUserLazyQuery>;
+export type CoursesByUserSuspenseQueryHookResult = ReturnType<typeof useCoursesByUserSuspenseQuery>;
+export type CoursesByUserQueryResult = Apollo.QueryResult<CoursesByUserQuery, CoursesByUserQueryVariables>;

@@ -293,3 +293,20 @@ mutation CreateCategory($categoryName: String!) {
 query SubjectsByCategory($categoryId: String!) {
   subjectsByCategory(categoryId: $categoryId)
 }
+
+query CoursesByUser($userId: String!) {
+  coursesByUser(userId: $userId) {
+    _id
+    subject
+    categoryId
+    description
+    videoLesson
+    price
+    level
+    availableDays
+    availableTimes
+    enrolledStudentIds
+    requestedStudentIds
+    reviewIds
+  }
+}

@@ -2,15 +2,20 @@
 
 import { ReactElement } from "react";
 import type { NextPageWithLayout } from "../_app";
-import { useCoursesQuery } from "@/graphql/generated";
+import { Course, useCoursesByUserQuery } from "@/graphql/generated";
 import Layout from "@/components/Layout";
 import { LessonCard } from "@/components/Card";
 import { useAuth } from "@/_contexts/AuthContext";
 
 const Page: NextPageWithLayout = () => {
   const { userdata } = useAuth();
-  const { data, loading } = useCoursesQuery();
-  const courses = data?.courses?.filter((course) => course.tutorId._id === userdata?._id);
+  const { data, loading } = useCoursesByUserQuery({
+    variables: {
+      userId: userdata?._id as string,
+    },
+    skip: !userdata?._id,
+  });
+  if (!data?.coursesByUser) return <p>Хичээл олдсонгүй.</p>;
   return (
     <div className="flex flex-col gap-2">
       <h1 className="text-xl font-semibold">Миний хичээлүүд</h1>
@@ -18,8 +23,8 @@ const Page: NextPageWithLayout = () => {
         <>loading...</>
       ) : (
         <div className="flex gap-3 flex-wrap">
-          {courses?.map((course, id) => (
-            <LessonCard key={id} data={course} />
+          {data?.coursesByUser?.map((course, id) => (
+            <LessonCard key={id} data={course as Course} />
           ))}
         </div>
       )}

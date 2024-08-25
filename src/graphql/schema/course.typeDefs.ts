@@ -36,6 +36,7 @@ export const courseTypeDefs = gql`
     course(courseId: String): Course!
     getTeachers(input: getTeachersInput!): [Course]
     subjectsByCategory(categoryId: String!): [String!]
+    coursesByUser(userId: String!): [Course]
   }
 
   input CreateCourseInput {
