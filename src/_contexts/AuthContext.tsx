@@ -2,15 +2,15 @@
 
 import React, { ReactNode, createContext, useContext, useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { User, useUserLazyQuery } from "@/graphql/generated";
+import { User0, useUserLazyQuery } from "@/graphql/generated";
 
 type Props = {
   children: ReactNode;
 };
 
 type AuthContextType = {
-  userdata: User | null;
-  setUserData: (arg: User) => void;
+  userdata: User0 | null;
+  setUserData: (arg: User0) => void;
 };
 
 const AuthContext = createContext({} as AuthContextType);
@@ -20,7 +20,7 @@ export function useAuth() {
 }
 
 const AuthProvider = (props: Props) => {
-  const [userdata, setUserData] = useState<User | null>(null);
+  const [userdata, setUserData] = useState<User0 | null>(null);
   const [getUser] = useUserLazyQuery();
   const router = useRouter();
   const pathname = usePathname();
@@ -34,7 +34,7 @@ const AuthProvider = (props: Props) => {
           try {
             const { data } = await getUser({ variables: { token } });
             if (data) {
-              setUserData(data.user);
+              setUserData(data.user as User0);
               console.log("userdata: ", data.user);
             }
             if (pathname === "/") {
