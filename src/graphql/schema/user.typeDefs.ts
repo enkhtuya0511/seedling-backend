@@ -27,9 +27,40 @@ export const userTypeDefs = gql`
     otpCodeExpires: Float
   }
 
+  type Course {
+    _id: String!
+    tutorId: User!
+    subject: String!
+    categoryId: String!
+    description: String!
+    videoLesson: String
+    price: String!
+    level: [String!]
+    availableDays: [String!]
+    availableTimes: [String!]
+    enrolledStudentIds: [String]
+    requestedStudentIds: [String]
+    reviewIds: [String]
+  }
+
+  type User0 {
+    _id: String!
+    fullName: String!
+    email: String!
+    phoneNumber: String!
+    password: String!
+    profilePic: String!
+
+    tutorProfile: TutorProfile
+
+    favorites: [Course]
+    otpCode: String
+    otpCodeExpires: Float
+  }
+
   type Query {
     users: [User!]
-    user(token: String): User!
+    user(token: String): User0!
   }
 
   input SignUpInput {

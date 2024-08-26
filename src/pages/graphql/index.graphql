@@ -36,7 +36,23 @@ query User($token: String) {
         certificationUrls
       }
     }
-    favorites
+    favorites {
+      _id
+      subject
+      categoryId
+      description
+      price
+      level
+      enrolledStudentIds
+      requestedStudentIds
+      tutorId {
+        _id
+        email
+        fullName
+        phoneNumber
+        profilePic
+      }
+    }
     otpCode
     otpCodeExpires
   }
