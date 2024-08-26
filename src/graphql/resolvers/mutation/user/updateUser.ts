@@ -23,6 +23,17 @@ export async function updateUser(parent: any, { input, userId }: { input: Update
         new: true,
       }
     );
+
+    // await User.findByIdAndUpdate(userId, { ...input, favorites: newFavorites }, { new: true });
+
+    // const updatedUser = await User.findById(userId).populate({
+    //   path: "favorites",
+    //   populate: {
+    //     path: "tutorId",
+    //     model: "User",
+    //   },
+    // });
+
     return updatedUser;
   } catch (error) {
     console.error("Error updating user: ", error);

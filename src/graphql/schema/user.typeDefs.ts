@@ -105,6 +105,7 @@ export const userTypeDefs = gql`
   type Mutation {
     signUp(input: SignUpInput!): User!
     login(input: LoginInput!): Token
+    # updateUser(userId: String!, input: UpdateUserInput!): User0!
     updateUser(userId: String!, input: UpdateUserInput!): User!
     deleteUser(userId: String!): User
   }
