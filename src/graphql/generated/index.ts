@@ -276,10 +276,10 @@ export type UpdateCourseInput = {
   availableTimes?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   categoryId?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
-  enrolledStudentIds?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  enrolledStudentIds?: InputMaybe<Scalars['String']['input']>;
   level?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   price?: InputMaybe<Scalars['String']['input']>;
-  requestedStudentIds?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  requestedStudentIds?: InputMaybe<Scalars['String']['input']>;
   reviewIds?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   subject?: InputMaybe<Scalars['String']['input']>;
   videoLesson?: InputMaybe<Scalars['String']['input']>;

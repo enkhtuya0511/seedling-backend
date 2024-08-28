@@ -72,7 +72,7 @@ const Page: NextPageWithLayout = () => {
         reviewIds: course.course.reviewIds,
         subject: course.course.subject,
         videoLesson: course.course.videoLesson,
-      });
+      } as UpdateCourseInput);
     }
   }, [course]);
 
