@@ -36,23 +36,7 @@ query User($token: String) {
         certificationUrls
       }
     }
-    favorites {
-      _id
-      subject
-      categoryId
-      description
-      price
-      level
-      enrolledStudentIds
-      requestedStudentIds
-      tutorId {
-        _id
-        email
-        fullName
-        phoneNumber
-        profilePic
-      }
-    }
+    favorites
     otpCode
     otpCodeExpires
   }
@@ -116,23 +100,6 @@ mutation UpdateUser($userId: String!, $input: UpdateUserInput!) {
         certificationUrls
       }
     }
-    # favorites {
-    #   _id
-    #   subject
-    #   categoryId
-    #   description
-    #   price
-    #   level
-    #   enrolledStudentIds
-    #   requestedStudentIds
-    #   tutorId {
-    #     _id
-    #     email
-    #     fullName
-    #     phoneNumber
-    #     profilePic
-    #   }
-    # }
     favorites
     otpCode
     otpCodeExpires

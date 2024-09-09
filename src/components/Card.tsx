@@ -43,9 +43,7 @@ export function LessonCard({ data }: { data: Course | null }) {
       </CardHeader>
       <CardContent className="border-t p-4">
         <div className="flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <Star className="text-yellow-400" /> <span>5</span>
-          </div>
+          <div className="flex items-center gap-2">{/* <Star className="text-yellow-400" /> <span>5</span> */}</div>
           <div className="flex items-center gap-2">
             <User className="text-blue-500" /> <span>{data?.enrolledStudentIds?.length} students</span>
           </div>

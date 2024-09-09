@@ -5,8 +5,6 @@ export async function updateUser(parent: any, { input, userId }: { input: Update
   try {
     const user = await User.findById(userId);
 
-    console.log("input", input);
-
     let newFavorites = user.favorites;
     if (input.favorites) {
       if (user.favorites.includes(input.favorites)) {
@@ -23,16 +21,6 @@ export async function updateUser(parent: any, { input, userId }: { input: Update
         new: true,
       }
     );
-
-    // await User.findByIdAndUpdate(userId, { ...input, favorites: newFavorites }, { new: true });
-
-    // const updatedUser = await User.findById(userId).populate({
-    //   path: "favorites",
-    //   populate: {
-    //     path: "tutorId",
-    //     model: "User",
-    //   },
-    // });
 
     return updatedUser;
   } catch (error) {

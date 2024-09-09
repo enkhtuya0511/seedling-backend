@@ -43,24 +43,9 @@ export const userTypeDefs = gql`
     reviewIds: [String]
   }
 
-  type User0 {
-    _id: String!
-    fullName: String!
-    email: String!
-    phoneNumber: String!
-    password: String!
-    profilePic: String!
-
-    tutorProfile: TutorProfile
-
-    favorites: [Course]
-    otpCode: String
-    otpCodeExpires: Float
-  }
-
   type Query {
     users: [User!]
-    user(token: String): User0!
+    user(token: String): User!
   }
 
   input SignUpInput {
@@ -105,7 +90,6 @@ export const userTypeDefs = gql`
   type Mutation {
     signUp(input: SignUpInput!): User!
     login(input: LoginInput!): Token
-    # updateUser(userId: String!, input: UpdateUserInput!): User0!
     updateUser(userId: String!, input: UpdateUserInput!): User!
     deleteUser(userId: String!): User
   }

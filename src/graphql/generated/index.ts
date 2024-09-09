@@ -172,7 +172,7 @@ export type Query = {
   review: Review;
   reviews?: Maybe<Array<Review0>>;
   subjectsByCategory?: Maybe<Array<Scalars['String']['output']>>;
-  user: User0;
+  user: User;
   users?: Maybe<Array<User>>;
 };
 
@@ -317,20 +317,6 @@ export type User = {
   tutorProfile?: Maybe<TutorProfile>;
 };
 
-export type User0 = {
-  __typename?: 'User0';
-  _id: Scalars['String']['output'];
-  email: Scalars['String']['output'];
-  favorites?: Maybe<Array<Maybe<Course>>>;
-  fullName: Scalars['String']['output'];
-  otpCode?: Maybe<Scalars['String']['output']>;
-  otpCodeExpires?: Maybe<Scalars['Float']['output']>;
-  password: Scalars['String']['output'];
-  phoneNumber: Scalars['String']['output'];
-  profilePic: Scalars['String']['output'];
-  tutorProfile?: Maybe<TutorProfile>;
-};
-
 export type GetTeachersInput = {
   availableDays?: InputMaybe<Array<Scalars['String']['input']>>;
   availableTimes?: InputMaybe<Array<Scalars['String']['input']>>;
@@ -350,7 +336,7 @@ export type UserQueryVariables = Exact<{
 }>;
 
 
-export type UserQuery = { __typename?: 'Query', user: { __typename?: 'User0', _id: string, fullName: string, email: string, phoneNumber: string, password: string, profilePic: string, otpCode?: string | null, otpCodeExpires?: number | null, tutorProfile?: { __typename?: 'TutorProfile', courseIds?: Array<string | null> | null, resume?: { __typename?: 'Resume', education?: string | null, workExperiences?: string | null, certificationUrls?: Array<string | null> | null } | null } | null, favorites?: Array<{ __typename?: 'Course', _id: string, subject: string, categoryId: string, description: string, price: string, level?: Array<string> | null, enrolledStudentIds?: Array<string | null> | null, requestedStudentIds?: Array<string | null> | null, tutorId: { __typename?: 'User', _id: string, email: string, fullName: string, phoneNumber: string, profilePic: string } } | null> | null } };
+export type UserQuery = { __typename?: 'Query', user: { __typename?: 'User', _id: string, fullName: string, email: string, phoneNumber: string, password: string, profilePic: string, favorites?: Array<string | null> | null, otpCode?: string | null, otpCodeExpires?: number | null, tutorProfile?: { __typename?: 'TutorProfile', courseIds?: Array<string | null> | null, resume?: { __typename?: 'Resume', education?: string | null, workExperiences?: string | null, certificationUrls?: Array<string | null> | null } | null } | null } };
 
 export type LoginMutationVariables = Exact<{
   input: LoginInput;
@@ -550,23 +536,7 @@ export const UserDocument = gql`
         certificationUrls
       }
     }
-    favorites {
-      _id
-      subject
-      categoryId
-      description
-      price
-      level
-      enrolledStudentIds
-      requestedStudentIds
-      tutorId {
-        _id
-        email
-        fullName
-        phoneNumber
-        profilePic
-      }
-    }
+    favorites
     otpCode
     otpCodeExpires
   }

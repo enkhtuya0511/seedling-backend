@@ -34,7 +34,7 @@ const Reviews = ({ courseId, setCourseId }: Props) => {
   if (loading) return <p>Ачаалж байна...</p>;
   return (
     <div className="flex flex-col gap-2">
-      {data?.reviews ? (
+      {(data?.reviews?.length as number) > 0 ? (
         <>
           <Select onValueChange={(val) => setCourseId(val)} defaultValue={courseId as string}>
             <SelectTrigger className="w-[250px]">
@@ -54,8 +54,8 @@ const Reviews = ({ courseId, setCourseId }: Props) => {
 
           <div className="flex p-4 items-center gap-10">
             <div className="flex flex-col items-center bg-slate-500 p-3">
-              <h1 className="font-bold text-[30px]">{overallRating.toFixed(1) || 0}</h1>
-              <p>★ ★ ★ ★ ☆</p>
+              <h1 className="font-bold text-[30px]">{overallRating ? overallRating.toFixed(1) : 0}</h1>
+              {/* <p>★ ★ ★ ★ ☆</p> */}
               <p>Дундаж үнэлгээ</p>
             </div>
 
