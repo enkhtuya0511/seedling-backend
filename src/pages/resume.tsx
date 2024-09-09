@@ -64,7 +64,7 @@ const Page: NextPageWithLayout = () => {
             </Button>
           </div>
         </div>
-        {userdata?.tutorProfile?.resume && (
+        {userdata?.tutorProfile && (
           <div className="flex flex-col gap-3">
             <TestBubble
               exampleContext="2016 — 2020 МУИС Хятад хэл шинжлэл"

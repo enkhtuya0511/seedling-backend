@@ -15,8 +15,8 @@ const PriceAndStudents = ({ data }: { data: Course }) => {
         </CardContent>
       </Card>
       <Card x-chunk="dashboard-01-chunk-0">
-        <CardHeader className="flex flex-row items-center justify-between space-y-0">
-          <CardTitle className="text-sm font-medium">Үнэ /50-минут бүр/</CardTitle>
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 gap-4">
+          <CardTitle className="text-sm font-medium">Үнэ /50-мин бүр/</CardTitle>
           <HandCoins className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>

@@ -77,7 +77,7 @@ const Topic = ({ handleData, newLesson }: Props) => {
                   onSelect={(currentValue) => {
                     setValue(currentValue === value ? "" : currentValue);
                     setOpen(false);
-                    console.log("first", currentValue);
+                    // console.log("first", currentValue);
                     handleData(currentValue, "subject");
                   }}
                 >

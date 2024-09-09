@@ -10,6 +10,7 @@ import AvailableDays from "@/components/update/AvailableDays";
 import CategoryAndPrice from "@/components/update/CategoryAndPrice";
 import VideoLesson from "@/components/update/Video";
 import { Button } from "@/components/ui/button";
+import toast from "react-hot-toast";
 
 const Page: NextPageWithLayout = () => {
   const router = useRouter();
@@ -53,6 +54,7 @@ const Page: NextPageWithLayout = () => {
         },
       });
       console.log("after req: ", data);
+      toast.success("хичээл амжилттай шинэчлэгдлээ!");
     } catch (error) {
       console.log("error updating course: ", error);
     }

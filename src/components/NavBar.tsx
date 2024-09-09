@@ -39,7 +39,7 @@ export default function NavBar() {
 }
 
 const navItems = [
-  { label: "Dashboard", icon: <BarChart3 className="h-4 w-4" />, name: "dashboard" },
+  { label: "Хянах самбар", icon: <BarChart3 className="h-4 w-4" />, name: "dashboard" },
   { label: "Хичээл нэмэх", icon: <PencilLine className="h-4 w-4" />, name: "createLesson" },
   { label: "Миний хичээлүүд", icon: <BookCopy className="h-4 w-4" />, name: "lessons" },
   { label: "Сурагчид", icon: <Users className="h-4 w-4" />, name: "students" },

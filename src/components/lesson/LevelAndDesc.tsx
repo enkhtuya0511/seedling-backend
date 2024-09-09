@@ -24,7 +24,7 @@ const LevelAndDesc = ({ data }: { data: Course }) => {
           </div>
           <div className="grid gap-3">
             <Label>Хичээлийн Тодорхойлолт</Label>
-            <Textarea id="description" defaultValue={data.description} className="min-h-32" />
+            <Textarea id="description" defaultValue={data.description} className="min-h-32" disabled />
           </div>
         </div>
       </CardContent>

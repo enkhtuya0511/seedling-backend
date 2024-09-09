@@ -5,23 +5,22 @@ export async function updateCourse(parent: any, { input, courseId }: { input: Up
   try {
     const course = await Course.findById(courseId);
 
-    let newStudent = course.enrolledStudentIds;
-    if (input.enrolledStudentIds) {
-      if (course.enrolledStudentIds.includes(input.enrolledStudentIds)) {
-        newStudent = course.enrolledStudentIds.filter((student: string) => student.toString() !== input.enrolledStudentIds);
+    let updatedStudents = course.enrolledStudentIds;
+
+    if (input.enrolledStudentIds?.[0]) {
+      if (course.enrolledStudentIds.includes(input.enrolledStudentIds?.[0])) {
+        updatedStudents = course.enrolledStudentIds.filter((student: string) => student.toString() !== input.enrolledStudentIds?.[0]);
       } else {
-        newStudent = [...course.enrolledStudentIds, input.enrolledStudentIds];
+        updatedStudents = [...course.enrolledStudentIds, input.enrolledStudentIds?.[0]];
       }
     }
-
     const updatedCourse = await Course.findByIdAndUpdate(
       courseId,
-      { ...input, enrolledStudentIds: newStudent },
+      { ...input, enrolledStudentIds: updatedStudents },
       {
         new: true,
       }
     ).populate("tutorId");
-
     return updatedCourse;
   } catch (error) {
     console.error("Error updating course: ", error);

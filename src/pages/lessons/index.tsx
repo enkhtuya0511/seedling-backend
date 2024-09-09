@@ -17,7 +17,7 @@ const Page: NextPageWithLayout = () => {
   });
 
   if (loading) return <p>Ачаалж байна...</p>;
-  if (!data?.coursesByUser) return <p>Хичээл олдсонгүй.</p>;
+  if (data?.coursesByUser?.length === 0) return <p>Хичээл олдсонгүй.</p>;
   return (
     <div className="flex flex-col gap-2">
       <h1 className="text-xl font-semibold">Миний хичээлүүд</h1>
