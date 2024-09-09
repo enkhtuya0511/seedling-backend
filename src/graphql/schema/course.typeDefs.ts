@@ -59,8 +59,8 @@ export const courseTypeDefs = gql`
     level: [String]
     availableDays: [String]
     availableTimes: [String]
-    enrolledStudentIds: [String]
-    requestedStudentIds: [String]
+    enrolledStudentIds: String
+    requestedStudentIds: String
 
     reviewIds: [String]
   }
